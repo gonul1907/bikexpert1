@@ -2,3 +2,10 @@ node_modules/
 dist/
 .DS_Store
 *.log
+
+*.html
+package.json
+package-lock.json
+tailwind.config.js
+vite.config.js
+vercel.json

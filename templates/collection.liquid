@@ -1,0 +1,9 @@
+{% for product in collection.products %}
+  {% render 'product-card',
+    card_title: product.title,
+    card_subtitle: product.vendor,
+    card_price: product.price | money,
+    card_img: product.featured_image | img_url: '600x450',
+    card_href: product.url
+  %}
+{% endfor %}
