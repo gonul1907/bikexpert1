@@ -165,12 +165,110 @@
   </div><!-- end grid -->
 
   <!-- Description + Specs -->
-  {% if product.description != blank %}
-  <div style="margin-top:3.5rem; border-top:1px solid #eee; padding-top:2.5rem;">
-    <h2 style="font-size:1.25rem; font-weight:900; color:#111; margin-bottom:1.25rem;">Productomschrijving</h2>
-    <div style="font-size:0.95rem; line-height:1.9; color:#444; max-width:760px;">{{ product.description }}</div>
+  <div style="margin-top:3.5rem; border-top:1px solid #eee; padding-top:2.5rem; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
+
+    <!-- Description -->
+    <div>
+      <h2 style="font-size:1.15rem; font-weight:900; color:#111; margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.04em;">Productomschrijving</h2>
+      {% if product.description != blank %}
+      <div style="font-size:0.92rem; line-height:1.9; color:#444;">{{ product.description }}</div>
+      {% else %}
+      <p style="color:#aaa; font-size:0.9rem;">Geen omschrijving beschikbaar.</p>
+      {% endif %}
+    </div>
+
+    <!-- Specs table -->
+    <div>
+      <h2 style="font-size:1.15rem; font-weight:900; color:#111; margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.04em;">Specificaties</h2>
+      <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
+        {% assign specs = "" %}
+        {% if product.metafields.custom.motor != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600; width:45%; white-space:nowrap;">Motor</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.motor }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.accu != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Accu</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.accu }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.actieradius != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Actieradius</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.actieradius }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.max_snelheid != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Max. snelheid</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.max_snelheid }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.wielmaat != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Wielmaat</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.wielmaat }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.gewicht != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Gewicht</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.gewicht }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.max_belasting != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Max. belasting</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.max_belasting }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.remmen != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Remmen</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.remmen }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.versnellingen != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Versnellingen</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.versnellingen }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.instap != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Instap</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.instap }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.kleur != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Kleur</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.kleur }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.garantie != blank %}
+        <tr>
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Garantie</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.garantie }}</td>
+        </tr>
+        {% else %}
+        <tr>
+          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Garantie</td>
+          <td style="padding:0.6rem 0; color:#111; font-weight:500;">1 jaar</td>
+        </tr>
+        {% endif %}
+      </table>
+    </div>
+
   </div>
-  {% endif %}
+
+  <style>
+    @media (max-width: 768px) {
+      div[style*="grid-template-columns:1fr 1fr"]:last-of-type { grid-template-columns: 1fr !important; }
+    }
+  </style>
 
 </div>
 
