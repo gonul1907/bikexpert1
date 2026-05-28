@@ -164,21 +164,34 @@
     </div><!-- end right -->
   </div><!-- end grid -->
 
+  <style>
+    @media (max-width: 860px) {
+      .bx-desc-grid { grid-template-columns: 1fr !important; }
+      .bx-specs-sticky { position: static !important; }
+    }
+    .bx-product-desc h3 { font-size:1rem; font-weight:800; color:#111; margin:1.5rem 0 0.5rem; }
+    .bx-product-desc p { font-size:0.9rem; color:#555; line-height:1.85; margin:0 0 0.75rem; }
+    .bx-product-desc ul { font-size:0.9rem; color:#444; line-height:1.85; padding-left:1.25rem; margin:0 0 1rem; }
+    .bx-product-desc li { margin-bottom:0.2rem; }
+    .bx-product-desc strong { color:#111; }
+    .bx-product-desc a { color:#111; font-weight:600; }
+  </style>
+
   <!-- Description + Specs -->
-  <div style="margin-top:3.5rem; border-top:1px solid #eee; padding-top:2.5rem; display:grid; grid-template-columns:1fr 380px; gap:3rem; align-items:start;">
+  <div class="bx-desc-grid" style="margin-top:3.5rem; border-top:1px solid #eee; padding-top:2.5rem; display:grid; grid-template-columns:1fr 380px; gap:3rem; align-items:start;">
 
     <!-- Description -->
     <div>
-      <h2 style="font-size:1.15rem; font-weight:900; color:#111; margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.04em;">Productomschrijving</h2>
+      <h2 style="font-size:1.55rem; font-weight:900; color:#111; margin:0 0 1rem; line-height:1.2;">{{ product.title }}</h2>
       {% if product.description != blank %}
-      <div style="font-size:0.92rem; line-height:1.9; color:#444;">{{ product.description }}</div>
+      <div class="bx-product-desc" style="font-size:0.9rem; line-height:1.85; color:#444;">{{ product.description }}</div>
       {% else %}
       <p style="color:#aaa; font-size:0.9rem;">Geen omschrijving beschikbaar.</p>
       {% endif %}
     </div>
 
     <!-- Specs table card -->
-    <div style="border:1px solid #e5e5e5; border-radius:10px; overflow:hidden; position:sticky; top:80px;">
+    <div class="bx-specs-sticky" style="border:1px solid #e5e5e5; border-radius:10px; overflow:hidden; position:sticky; top:80px;">
       <div style="background:#111; padding:0.85rem 1.1rem;">
         <h2 style="font-size:1rem; font-weight:800; color:#fff; margin:0; letter-spacing:0.03em;">Specificaties</h2>
       </div>
