@@ -1,5 +1,5 @@
 {
   "installCommand": "npm install && chmod +x node_modules/.bin/*",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist"
+  "buildCommand": "npm run tw:build",
+  "outputDirectory": "assets"
 }
