@@ -13,8 +13,20 @@
 
     <!-- Desktop nav -->
     <nav style="display:flex; align-items:center; gap:0.15rem; flex:1; overflow-x:auto;" aria-label="Hoofdnavigatie">
-      <a href="/collections/elektrische-fietsen" style="text-decoration:none; color:#333; font-weight:600; font-size:0.88rem; padding:0.5rem 0.75rem; border-radius:5px; white-space:nowrap; transition:background 0.15s;" onmouseover="this.style.background='#f3f3f3'" onmouseout="this.style.background='transparent'">Elektrische fietsen</a>
-      <a href="/collections/bakfiets" style="text-decoration:none; color:#333; font-weight:600; font-size:0.88rem; padding:0.5rem 0.75rem; border-radius:5px; white-space:nowrap; transition:background 0.15s;" onmouseover="this.style.background='#f3f3f3'" onmouseout="this.style.background='transparent'">Bakfietsen</a>
+      <!-- Elektrische fietsen dropdown -->
+      <div class="bx-dropdown" style="position:relative;">
+        <button class="bx-dropdown-btn" style="background:none; border:none; cursor:pointer; color:#333; font-weight:600; font-size:0.88rem; padding:0.5rem 0.75rem; border-radius:5px; white-space:nowrap; display:flex; align-items:center; gap:0.3rem; font-family:inherit;" onmouseover="this.style.background='#f3f3f3'" onmouseout="this.style.background='transparent'">
+          Elektrische fietsen
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="bx-dropdown-menu" style="display:none; position:absolute; top:100%; left:0; background:#fff; border:1px solid #e5e5e5; border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,0.1); min-width:200px; z-index:300; padding:0.4rem 0;">
+          <a href="/collections/elektrische-fietsen" style="display:block; padding:0.6rem 1rem; color:#333; font-weight:600; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.background='#f7f7f7'" onmouseout="this.style.background='transparent'">Alle elektrische fietsen</a>
+          <div style="height:1px; background:#f0f0f0; margin:0.3rem 0;"></div>
+          <a href="/collections/elektrische-herenfietsen" style="display:block; padding:0.6rem 1rem; color:#555; font-weight:500; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.background='#f7f7f7'" onmouseout="this.style.background='transparent'">Elektrische herenfietsen</a>
+          <a href="/collections/elektrische-damesfietsen" style="display:block; padding:0.6rem 1rem; color:#555; font-weight:500; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.background='#f7f7f7'" onmouseout="this.style.background='transparent'">Elektrische damesfietsen</a>
+          <a href="/collections/bakfiets" style="display:block; padding:0.6rem 1rem; color:#555; font-weight:500; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.background='#f7f7f7'" onmouseout="this.style.background='transparent'">Bakfietsen</a>
+        </div>
+      </div>
       <a href="/collections/damesfietsen" style="text-decoration:none; color:#333; font-weight:600; font-size:0.88rem; padding:0.5rem 0.75rem; border-radius:5px; white-space:nowrap; transition:background 0.15s;" onmouseover="this.style.background='#f3f3f3'" onmouseout="this.style.background='transparent'">Damesfietsen</a>
       <a href="/collections/herenfietsen" style="text-decoration:none; color:#333; font-weight:600; font-size:0.88rem; padding:0.5rem 0.75rem; border-radius:5px; white-space:nowrap; transition:background 0.15s;" onmouseover="this.style.background='#f3f3f3'" onmouseout="this.style.background='transparent'">Herenfietsen</a>
       <a href="/collections/fatbikes" style="text-decoration:none; color:#333; font-weight:600; font-size:0.88rem; padding:0.5rem 0.75rem; border-radius:5px; white-space:nowrap; transition:background 0.15s;" onmouseover="this.style.background='#f3f3f3'" onmouseout="this.style.background='transparent'">Fatbikes</a>
@@ -54,7 +66,9 @@
   <!-- Mobile nav (hidden by default) -->
   <nav id="mobile-menu" style="display:none; border-top:1px solid #eee; background:#fff;" aria-label="Mobiel menu">
     <a href="/collections/elektrische-fietsen" style="display:block; padding:0.75rem 1.25rem; color:#333; font-weight:600; font-size:0.9rem; text-decoration:none; border-bottom:1px solid #f2f2f2;">Elektrische fietsen</a>
-    <a href="/collections/bakfiets" style="display:block; padding:0.75rem 1.25rem; color:#333; font-weight:600; font-size:0.9rem; text-decoration:none; border-bottom:1px solid #f2f2f2;">Bakfietsen</a>
+    <a href="/collections/elektrische-herenfietsen" style="display:block; padding:0.6rem 1.25rem 0.6rem 2rem; color:#666; font-weight:500; font-size:0.85rem; text-decoration:none; border-bottom:1px solid #f2f2f2; background:#fafafa;">↳ Elektrische herenfietsen</a>
+    <a href="/collections/elektrische-damesfietsen" style="display:block; padding:0.6rem 1.25rem 0.6rem 2rem; color:#666; font-weight:500; font-size:0.85rem; text-decoration:none; border-bottom:1px solid #f2f2f2; background:#fafafa;">↳ Elektrische damesfietsen</a>
+    <a href="/collections/bakfiets" style="display:block; padding:0.6rem 1.25rem 0.6rem 2rem; color:#666; font-weight:500; font-size:0.85rem; text-decoration:none; border-bottom:1px solid #f2f2f2; background:#fafafa;">↳ Bakfietsen</a>
     <a href="/collections/damesfietsen" style="display:block; padding:0.75rem 1.25rem; color:#333; font-weight:600; font-size:0.9rem; text-decoration:none; border-bottom:1px solid #f2f2f2;">Damesfietsen</a>
     <a href="/collections/herenfietsen" style="display:block; padding:0.75rem 1.25rem; color:#333; font-weight:600; font-size:0.9rem; text-decoration:none; border-bottom:1px solid #f2f2f2;">Herenfietsen</a>
     <a href="/collections/fatbikes" style="display:block; padding:0.75rem 1.25rem; color:#333; font-weight:600; font-size:0.9rem; text-decoration:none; border-bottom:1px solid #f2f2f2;">Fatbikes</a>
@@ -80,6 +94,16 @@
   document.getElementById('mobile-menu-btn').addEventListener('click', function() {
     var m = document.getElementById('mobile-menu');
     m.style.display = m.style.display === 'none' ? 'block' : 'none';
+  });
+
+  // Dropdown hover
+  document.querySelectorAll('.bx-dropdown').forEach(function(dd) {
+    var menu = dd.querySelector('.bx-dropdown-menu');
+    dd.addEventListener('mouseenter', function() { menu.style.display = 'block'; });
+    dd.addEventListener('mouseleave', function() { menu.style.display = 'none'; });
+    dd.querySelector('.bx-dropdown-btn').addEventListener('click', function() {
+      menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    });
   });
 </script>
 
