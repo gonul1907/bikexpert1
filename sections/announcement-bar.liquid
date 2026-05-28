@@ -1,0 +1,28 @@
+<div
+  id="announcement-bar"
+  style="background:#0a0a0a; color:#fff; font-size:0.75rem; font-weight:500; letter-spacing:0.05em; padding:0.625rem 1.25rem; text-align:center; position:relative;"
+  data-announcement-bar
+  role="region"
+  aria-label="Aankondiging"
+>
+  <span style="color:#b5f23d; font-weight:700;">✦</span>
+  Gratis bezorging vanaf €99 &nbsp;·&nbsp; Showroom open di–za 10–18u &nbsp;·&nbsp; 0-rente financiering beschikbaar
+  <span style="color:#b5f23d; font-weight:700;">✦</span>
+  <button
+    id="announcement-dismiss"
+    onclick="document.getElementById('announcement-bar').style.display='none'"
+    style="position:absolute; right:1rem; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:rgba(255,255,255,0.6); line-height:1;"
+    aria-label="Sluit aankondiging"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M18 6 6 18M6 6l12 12"/>
+    </svg>
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "Aankondigingsbalk",
+  "settings": []
+}
+{% endschema %}
