@@ -7,8 +7,8 @@
     "dev": "concurrently \"npm run tw:watch\" \"vite\"",
     "build": "npm run tw:build && vite build",
     "preview": "vite preview",
-    "tw:watch": "tailwindcss -i assets/base.css -o assets/main.css --watch",
-    "tw:build": "tailwindcss -i assets/base.css -o assets/main.css --minify"
+    "tw:watch": "npx tailwindcss -i assets/base.css -o assets/main.css --watch",
+    "tw:build": "npx tailwindcss -i assets/base.css -o assets/main.css --minify"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
