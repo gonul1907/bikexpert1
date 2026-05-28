@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="{{ request.locale.iso_code | default: 'nl' }}" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <title>{{ page_title }}{% unless page_title contains shop.name %} — {{ shop.name }}{% endunless %}</title>
+  <meta name="description" content="{{ page_description | default: shop.description | escape }}">
+  {% if canonical_url != blank %}
+  <link rel="canonical" href="{{ canonical_url }}">
+  {% endif %}
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:description" content="{{ page_description | default: shop.description | escape }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:locale" content="nl_NL">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ page_title | escape }}">
+  <meta name="twitter:description" content="{{ page_description | default: shop.description | escape }}">
+
+  <!-- Schema markup (LocalBusiness + WebSite) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://www.bikexpert.nl/#organization",
+        "name": "Bikexpert",
+        "url": "https://www.bikexpert.nl",
+        "logo": "https://www.bikexpert.nl/logo.png",
+        "description": "Premium fietszaak in Zwijndrecht — e-bikes, stadsfietsen, racefietsen en mountainbikes.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rijksstraatweg 1",
+          "addressLocality": "Zwijndrecht",
+          "postalCode": "3331",
+          "addressCountry": "NL"
+        },
+        "telephone": "+31781234567",
+        "email": "info@bikexpert.nl",
+        "openingHoursSpecification": [
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "18:00" },
+          { "@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "17:00" }
+        ],
+        "geo": { "@type": "GeoCoordinates", "latitude": 51.8100, "longitude": 4.6400 },
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "9.4", "reviewCount": "284", "bestRating": "10" }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.bikexpert.nl/#website",
+        "url": "https://www.bikexpert.nl",
+        "name": "Bikexpert",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.bikexpert.nl/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Compiled Tailwind CSS -->
+  {{ 'main.css' | asset_url | stylesheet_tag }}
+
+  <!-- Base styles -->
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+    body { font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden; }
+    ::selection { background: #b5f23d; color: #0a0a0a; }
+    :focus-visible { outline: 2px solid #b5f23d; outline-offset: 2px; }
+    img, video { display: block; max-width: 100%; }
+
+    .overlay-dark { background: linear-gradient(to bottom, rgba(0,0,0,.15) 0%, rgba(0,0,0,.65) 100%); }
+    .overlay-hero  { background: linear-gradient(105deg, rgba(0,0,0,.72) 0%, rgba(0,0,0,.25) 60%, transparent 100%); }
+
+    [data-animate] { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.25,.46,.45,.94), transform .6s cubic-bezier(.25,.46,.45,.94); }
+    [data-animate].in-view { opacity: 1; transform: translateY(0); }
+
+    .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: all 400ms cubic-bezier(.25,.46,.45,.94); }
+    .site-header.scrolled { background: rgba(255,255,255,.96); backdrop-filter: blur(12px); box-shadow: 0 1px 20px rgba(0,0,0,.08); }
+    .site-header.scrolled .nav-link  { color: #0a0a0a !important; }
+    .site-header.scrolled .logo-text { color: #0a0a0a !important; }
+    .site-header.scrolled .icon-btn  { color: rgba(10,10,10,.7) !important; }
+    .site-header.scrolled .icon-btn:hover { color: #0a0a0a !important; background: rgba(0,0,0,.06) !important; }
+    .site-header.scrolled .cta-btn   { border-color: rgba(0,0,0,.3) !important; color: #0a0a0a !important; }
+    .site-header.scrolled .cta-btn:hover { background: #0a0a0a !important; color: #fff !important; }
+    .site-header.scrolled .hamburger { color: rgba(10,10,10,.7) !important; }
+
+    .nav-link { position: relative; }
+    .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: #b5f23d; transition: width .3s ease; }
+    .nav-link:hover::after { width: 100%; }
+
+    .cart-drawer { position: fixed; inset-y: 0; right: 0; z-index: 200; width: 100%; max-width: 26rem; background: white; box-shadow: -8px 0 40px rgba(0,0,0,.15); transform: translateX(100%); transition: transform 400ms cubic-bezier(.25,.46,.45,.94); display: flex; flex-direction: column; }
+    .cart-drawer.open { transform: translateX(0); }
+    .cart-overlay { position: fixed; inset: 0; z-index: 199; background: rgba(0,0,0,.5); opacity: 0; pointer-events: none; transition: opacity 400ms; }
+    .cart-overlay.open { opacity: 1; pointer-events: auto; }
+
+    .mobile-menu { position: fixed; inset-y: 0; left: 0; z-index: 99; width: 20rem; max-width: 100%; background: white; box-shadow: 8px 0 40px rgba(0,0,0,.15); transform: translateX(-100%); transition: transform 400ms cubic-bezier(.25,.46,.45,.94); overflow-y: auto; }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-overlay { position: fixed; inset: 0; z-index: 98; background: rgba(0,0,0,.5); opacity: 0; pointer-events: none; transition: opacity 400ms; }
+    .mobile-overlay.open { opacity: 1; pointer-events: auto; }
+
+    .mega-menu { position: absolute; top: 100%; left: 0; right: 0; background: white; border-top: 1px solid #e5e5e5; box-shadow: 0 20px 60px rgba(0,0,0,.12); opacity: 0; pointer-events: none; transform: translateY(8px); transition: all .25s cubic-bezier(.25,.46,.45,.94); }
+    .mega-menu.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+    .accordion-body { overflow: hidden; max-height: 0; transition: max-height .3s ease; }
+    .accordion-body.open { max-height: 400px; }
+
+    .product-card { position: relative; background: #f9f9f9; border-radius: 1rem; overflow: hidden; transition: transform 400ms cubic-bezier(.25,.46,.45,.94); }
+    .product-card:hover { transform: translateY(-4px); }
+
+    .marquee-track { display: flex; gap: 4rem; align-items: center; white-space: nowrap; animation: marquee 28s linear infinite; }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+
+  {{ content_for_header }}
+</head>
+
+<body class="bg-white text-[#0a0a0a]">
+
+  {% section 'header' %}
+
+  <main id="main-content">
+    {{ content_for_layout }}
+  </main>
+
+  {% section 'footer' %}
+
+  <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+</body>
+</html>
