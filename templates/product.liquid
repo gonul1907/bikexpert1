@@ -1,11 +1,288 @@
-<div class="bx-container py-16">
-  <h1 class="text-4xl font-black mb-4">{{ product.title }}</h1>
-  <p class="text-2xl font-bold mb-4">{{ product.price | money }}</p>
-  <div class="prose mb-8">{{ product.description }}</div>
-  <form action="/cart/add" method="post">
-    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-    <button type="submit" class="inline-flex items-center gap-2 bg-[#0a0a0a] text-white font-semibold px-8 py-4 rounded-full hover:bg-[#b5f23d] hover:text-[#0a0a0a] transition-all duration-300">
-      In winkelwagen
-    </button>
-  </form>
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<div style="max-width:1200px; margin:0 auto; padding:2rem 1.25rem;">
+
+  <!-- Breadcrumb -->
+  <nav style="font-size:0.8rem; color:#888; margin-bottom:1.75rem; display:flex; align-items:center; gap:0.35rem; flex-wrap:wrap;">
+    <a href="/" style="color:#888; text-decoration:none;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#888'">Home</a>
+    <span>/</span>
+    {% if product.collections.first %}
+    <a href="{{ product.collections.first.url }}" style="color:#888; text-decoration:none;" onmouseover="this.style.color='#111'" onmouseout="this.style.color='#888'">{{ product.collections.first.title }}</a>
+    <span>/</span>
+    {% endif %}
+    <span style="color:#333;">{{ product.title }}</span>
+  </nav>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:3.5rem; align-items:start;">
+
+    <!-- LEFT: Image gallery -->
+    <div style="position:sticky; top:80px;">
+      <div style="border-radius:14px; overflow:hidden; background:#f6f6f6; margin-bottom:0.75rem; aspect-ratio:1/1; display:flex; align-items:center; justify-content:center;">
+        <img id="main-img"
+          src="{{ product.featured_image | image_url: width: 900 }}"
+          alt="{{ product.title }}"
+          style="width:100%; height:100%; object-fit:contain; padding:1.5rem; transition:opacity 0.2s;">
+      </div>
+      {% if product.images.size > 1 %}
+      <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+        {% for img in product.images %}
+        <button onclick="switchImage('{{ img | image_url: width: 900 }}')" style="width:72px; height:72px; border:2px solid {% if forloop.first %}#b5f23d{% else %}#e5e5e5{% endif %}; border-radius:8px; background:#f6f6f6; padding:4px; cursor:pointer; flex-shrink:0; transition:border-color 0.15s;" id="thumb-{{ forloop.index }}" onmouseover="this.style.borderColor='#b5f23d'" onmouseout="if(!this.classList.contains('active'))this.style.borderColor='#e5e5e5'">
+          <img src="{{ img | image_url: width: 150 }}" alt="{{ product.title }}" style="width:100%; height:100%; object-fit:contain; border-radius:4px;">
+        </button>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- RIGHT: Product info -->
+    <div>
+
+      <!-- Vendor badge -->
+      {% if product.vendor %}
+      <div style="display:inline-block; background:#111; color:#b5f23d; font-size:0.7rem; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; padding:0.25rem 0.7rem; border-radius:4px; margin-bottom:0.75rem;">{{ product.vendor }}</div>
+      {% endif %}
+
+      <!-- Title -->
+      <h1 style="font-size:1.75rem; font-weight:900; color:#111; line-height:1.25; margin:0 0 0.75rem;">{{ product.title }}</h1>
+
+      <!-- Price -->
+      <div id="price-display" style="margin-bottom:1.5rem; display:flex; align-items:baseline; gap:0.6rem; flex-wrap:wrap;">
+        {% if current_variant.compare_at_price > current_variant.price %}
+        <span style="font-size:1rem; color:#aaa; text-decoration:line-through;">{{ current_variant.compare_at_price | money }}</span>
+        <span style="font-size:2rem; font-weight:900; color:#c00;">{{ current_variant.price | money }}</span>
+        <span style="background:#c00; color:#fff; font-size:0.72rem; font-weight:800; padding:0.2rem 0.55rem; border-radius:4px; letter-spacing:0.04em;">SALE</span>
+        {% else %}
+        <span style="font-size:2rem; font-weight:900; color:#111;">{{ current_variant.price | money }}</span>
+        {% endif %}
+      </div>
+
+      <!-- Variant options -->
+      {% unless product.has_only_default_variant %}
+      <form action="/cart/add" method="post" id="product-form">
+        <input type="hidden" name="id" id="variant-id" value="{{ current_variant.id }}">
+
+        {% for option in product.options_with_values %}
+        <div style="margin-bottom:1.25rem;">
+          <div style="font-size:0.8rem; font-weight:700; color:#555; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.5rem;">
+            {{ option.name }}:
+            <span id="selected-{{ option.position }}" style="color:#111; font-weight:600; text-transform:none; letter-spacing:0;">{{ option.selected_value }}</span>
+          </div>
+
+          {% assign option_name_downcase = option.name | downcase %}
+          {% if option_name_downcase == 'kleur' or option_name_downcase == 'color' or option_name_downcase == 'colour' %}
+          <!-- Color swatches -->
+          <div style="display:flex; gap:0.5rem; flex-wrap:wrap;" id="option-{{ option.position }}">
+            {% for value in option.values %}
+            {% assign color_value = value | downcase | replace: ' ', '' %}
+            {% assign is_selected = false %}
+            {% if option.selected_value == value %}{% assign is_selected = true %}{% endif %}
+            <button type="button"
+              class="variant-btn color-swatch"
+              data-option-pos="{{ option.position }}"
+              data-value="{{ value }}"
+              title="{{ value }}"
+              style="width:36px; height:36px; border-radius:50%; border:3px solid {% if is_selected %}#111{% else %}transparent{% endif %}; outline:2px solid {% if is_selected %}#111{% else %}#ddd{% endif %}; cursor:pointer; background:{{ color_value }}; padding:0; position:relative; transition:all 0.15s;"
+              onmouseover="this.style.outline='2px solid #111'"
+              onmouseout="if(!this.classList.contains('selected'))this.style.outline='2px solid #ddd'">
+            </button>
+            {% endfor %}
+          </div>
+
+          {% else %}
+          <!-- Option pills -->
+          <div style="display:flex; gap:0.4rem; flex-wrap:wrap;" id="option-{{ option.position }}">
+            {% for value in option.values %}
+            {% assign is_selected = false %}
+            {% if option.selected_value == value %}{% assign is_selected = true %}{% endif %}
+            <button type="button"
+              class="variant-btn option-pill"
+              data-option-pos="{{ option.position }}"
+              data-value="{{ value }}"
+              style="padding:0.45rem 1rem; border:2px solid {% if is_selected %}#111{% else %}#ddd{% endif %}; border-radius:6px; background:{% if is_selected %}#111{% else %}#fff{% endif %}; color:{% if is_selected %}#fff{% else %}#333{% endif %}; font-size:0.85rem; font-weight:600; cursor:pointer; transition:all 0.15s; white-space:nowrap;"
+              onmouseover="if(!this.classList.contains('selected')){this.style.borderColor='#111';this.style.background='#f5f5f5';}"
+              onmouseout="if(!this.classList.contains('selected')){this.style.borderColor='#ddd';this.style.background='#fff';}">
+              {{ value }}
+            </button>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+        {% endfor %}
+
+      {% else %}
+      <form action="/cart/add" method="post" id="product-form">
+        <input type="hidden" name="id" value="{{ current_variant.id }}">
+      {% endunless %}
+
+        <!-- Quantity -->
+        <div style="margin-bottom:1.25rem;">
+          <div style="font-size:0.8rem; font-weight:700; color:#555; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.5rem;">Aantal</div>
+          <div style="display:flex; align-items:center; border:1px solid #ddd; border-radius:8px; overflow:hidden; width:fit-content;">
+            <button type="button" onclick="var q=document.getElementById('qty');if(q.value>1)q.value=parseInt(q.value)-1" style="width:44px; height:44px; background:#f5f5f5; border:none; font-size:1.2rem; font-weight:600; cursor:pointer; color:#333;">−</button>
+            <input type="number" id="qty" name="quantity" value="1" min="1" style="width:52px; height:44px; border:none; border-left:1px solid #ddd; border-right:1px solid #ddd; text-align:center; font-size:0.95rem; font-weight:600; outline:none;">
+            <button type="button" onclick="document.getElementById('qty').value=parseInt(document.getElementById('qty').value)+1" style="width:44px; height:44px; background:#f5f5f5; border:none; font-size:1.2rem; font-weight:600; cursor:pointer; color:#333;">+</button>
+          </div>
+        </div>
+
+        <!-- Add to cart -->
+        {% if current_variant.available %}
+        <button type="submit" id="add-to-cart-btn" style="width:100%; background:#111; color:#fff; border:none; padding:1rem; border-radius:8px; font-size:1rem; font-weight:800; cursor:pointer; margin-bottom:0.6rem; transition:background 0.2s;" onmouseover="this.style.background='#b5f23d';this.style.color='#111'" onmouseout="this.style.background='#111';this.style.color='#fff'">
+          In winkelwagen
+        </button>
+        {% else %}
+        <button disabled id="add-to-cart-btn" style="width:100%; background:#e5e5e5; color:#999; border:none; padding:1rem; border-radius:8px; font-size:1rem; font-weight:800; cursor:not-allowed; margin-bottom:0.6rem;">
+          Uitverkocht
+        </button>
+        {% endif %}
+      </form>
+
+      <!-- USPs -->
+      <div style="border:1px solid #eee; border-radius:10px; padding:0.9rem 1rem; margin-top:0.5rem; display:flex; flex-direction:column; gap:0.55rem;">
+        <div style="display:flex; align-items:center; gap:0.6rem; font-size:0.84rem; color:#444;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b5f23d" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Gratis bezorging in Nederland
+        </div>
+        <div style="display:flex; align-items:center; gap:0.6rem; font-size:0.84rem; color:#444;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b5f23d" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          14 dagen retourrecht
+        </div>
+        <div style="display:flex; align-items:center; gap:0.6rem; font-size:0.84rem; color:#444;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b5f23d" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          1 jaar garantie
+        </div>
+        <div style="display:flex; align-items:center; gap:0.6rem; font-size:0.84rem; color:#444;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b5f23d" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Showroom in Zwijndrecht — kom proefrijden
+        </div>
+      </div>
+
+    </div><!-- end right -->
+  </div><!-- end grid -->
+
+  <!-- Description + Specs -->
+  {% if product.description != blank %}
+  <div style="margin-top:3.5rem; border-top:1px solid #eee; padding-top:2.5rem;">
+    <h2 style="font-size:1.25rem; font-weight:900; color:#111; margin-bottom:1.25rem;">Productomschrijving</h2>
+    <div style="font-size:0.95rem; line-height:1.9; color:#444; max-width:760px;">{{ product.description }}</div>
+  </div>
+  {% endif %}
+
 </div>
+
+<!-- Variant JSON for JS -->
+<script>
+  var productVariants = {{ product.variants | json }};
+  var productOptions = {{ product.options | json }};
+
+  function switchImage(src) {
+    var img = document.getElementById('main-img');
+    img.style.opacity = '0';
+    setTimeout(function(){ img.src = src; img.style.opacity = '1'; }, 150);
+  }
+
+  // Build selected options array
+  var selectedOptions = [
+    {% for option in product.options_with_values %}"{{ option.selected_value }}"{% unless forloop.last %},{% endunless %}{% endfor %}
+  ];
+
+  function findVariant() {
+    return productVariants.find(function(v) {
+      return selectedOptions.every(function(val, i) {
+        return v['option' + (i+1)] === val;
+      });
+    });
+  }
+
+  function updateVariant() {
+    var variant = findVariant();
+    if (!variant) return;
+
+    // Update hidden input
+    var vid = document.getElementById('variant-id');
+    if (vid) vid.value = variant.id;
+
+    // Update price
+    var priceEl = document.getElementById('price-display');
+    var formatter = new Intl.NumberFormat('nl-NL', { style: 'currency', currency: 'EUR' });
+    if (variant.compare_at_price && variant.compare_at_price > variant.price) {
+      priceEl.innerHTML = '<span style="font-size:1rem;color:#aaa;text-decoration:line-through;">' + formatter.format(variant.compare_at_price/100) + '</span>'
+        + '<span style="font-size:2rem;font-weight:900;color:#c00;">' + formatter.format(variant.price/100) + '</span>'
+        + '<span style="background:#c00;color:#fff;font-size:0.72rem;font-weight:800;padding:0.2rem 0.55rem;border-radius:4px;">SALE</span>';
+    } else {
+      priceEl.innerHTML = '<span style="font-size:2rem;font-weight:900;color:#111;">' + formatter.format(variant.price/100) + '</span>';
+    }
+
+    // Update add-to-cart button
+    var btn = document.getElementById('add-to-cart-btn');
+    if (btn) {
+      if (variant.available) {
+        btn.disabled = false;
+        btn.style.background = '#111';
+        btn.style.color = '#fff';
+        btn.style.cursor = 'pointer';
+        btn.textContent = 'In winkelwagen';
+      } else {
+        btn.disabled = true;
+        btn.style.background = '#e5e5e5';
+        btn.style.color = '#999';
+        btn.style.cursor = 'not-allowed';
+        btn.textContent = 'Uitverkocht';
+      }
+    }
+
+    // Update image if variant has one
+    if (variant.featured_image) {
+      switchImage(variant.featured_image.src.replace(/(\.\w+)$/, '_900x$1'));
+    }
+  }
+
+  document.querySelectorAll('.variant-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var pos = parseInt(this.dataset.optionPos) - 1;
+      var val = this.dataset.value;
+      selectedOptions[pos] = val;
+
+      // Update selected label
+      var label = document.getElementById('selected-' + (pos+1));
+      if (label) label.textContent = val;
+
+      // Update button styles in this group
+      var group = document.getElementById('option-' + (pos+1));
+      group.querySelectorAll('.variant-btn').forEach(function(b) {
+        b.classList.remove('selected');
+        if (b.classList.contains('color-swatch')) {
+          b.style.border = '3px solid transparent';
+          b.style.outline = '2px solid #ddd';
+        } else {
+          b.style.border = '2px solid #ddd';
+          b.style.background = '#fff';
+          b.style.color = '#333';
+        }
+      });
+
+      this.classList.add('selected');
+      if (this.classList.contains('color-swatch')) {
+        this.style.border = '3px solid #111';
+        this.style.outline = '2px solid #111';
+      } else {
+        this.style.border = '2px solid #111';
+        this.style.background = '#111';
+        this.style.color = '#fff';
+      }
+
+      updateVariant();
+    });
+
+    // Mark initially selected
+    if (btn.dataset.value === selectedOptions[parseInt(btn.dataset.optionPos)-1]) {
+      btn.classList.add('selected');
+    }
+  });
+</script>
+
+<style>
+  @media (max-width: 768px) {
+    div[style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+    div[style*="position:sticky"] { position: static !important; }
+  }
+</style>
