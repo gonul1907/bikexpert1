@@ -1,0 +1,98 @@
+<!--
+  SECTION: sections/hero.html
+  Shopify: {% section 'hero' %}
+
+  Full-bleed cinematic hero with:
+  - Video/poster background
+  - Headline + sub + dual CTA
+  - Scroll-down cue
+-->
+<section class="relative min-h-screen flex items-center overflow-hidden bg-bx-dark" aria-label="Hero">
+
+  <!-- Background image / video poster -->
+  <div class="absolute inset-0">
+    <img
+      src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=1800&q=85&auto=format&fit=crop"
+      alt="Bikexpert — premium e-bikes in Zwijndrecht"
+      class="w-full h-full object-cover"
+      fetchpriority="high"
+      decoding="async"
+      width="1800"
+      height="1200"
+    >
+    <!-- Gradient overlay -->
+    <div class="absolute inset-0 overlay-hero"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative bx-container py-32 pt-44 pb-24">
+    <div class="max-w-2xl">
+
+      <!-- Label -->
+      <div class="inline-flex items-center gap-2 mb-6" data-animate>
+        <span class="w-8 h-px bg-bx-accent"></span>
+        <span class="text-bx-accent text-xs font-semibold tracking-[0.2em] uppercase">Premium fietszaak · Zwijndrecht</span>
+      </div>
+
+      <!-- Headline -->
+      <h1
+        class="text-display-xl md:text-display-2xl font-black text-white leading-[1.0] tracking-tight text-balance mb-6"
+        data-animate
+        style="animation-delay: 0.1s"
+      >
+        Rij verder.<br>
+        Rij <span class="text-bx-accent">beter.</span>
+      </h1>
+
+      <!-- Subline -->
+      <p
+        class="text-white/70 text-lg md:text-xl leading-relaxed max-w-lg mb-10"
+        data-animate
+        style="animation-delay: 0.2s"
+      >
+        De beste e-bikes, racefietsen en service — allemaal onder één dak. Kom langs in onze showroom of bestel online.
+      </p>
+
+      <!-- CTAs -->
+      <div
+        class="flex flex-wrap gap-4"
+        data-animate
+        style="animation-delay: 0.3s"
+      >
+        <a href="/collections/ebikes" class="btn-accent btn btn-lg">
+          Bekijk e-bikes
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+        <a href="/pages/proefrit" class="btn-outline-white btn btn-lg">
+          Proefrit aanvragen
+        </a>
+      </div>
+
+      <!-- Stats row -->
+      <div class="flex flex-wrap gap-10 mt-16 border-t border-white/15 pt-8">
+        <div>
+          <p class="text-3xl font-black text-white">150<span class="text-bx-accent">+</span></p>
+          <p class="text-xs text-white/50 uppercase tracking-widest mt-1">Modellen</p>
+        </div>
+        <div>
+          <p class="text-3xl font-black text-white">12<span class="text-bx-accent">+</span></p>
+          <p class="text-xs text-white/50 uppercase tracking-widest mt-1">Merken</p>
+        </div>
+        <div>
+          <p class="text-3xl font-black text-white">25<span class="text-bx-accent">jr</span></p>
+          <p class="text-xs text-white/50 uppercase tracking-widest mt-1">Ervaring</p>
+        </div>
+        <div>
+          <p class="text-3xl font-black text-white">9.4<span class="text-bx-accent">/10</span></p>
+          <p class="text-xs text-white/50 uppercase tracking-widest mt-1">Klantbeoordeling</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
+    <span class="text-[10px] uppercase tracking-[0.2em]">Scroll</span>
+    <div class="w-px h-10 bg-gradient-to-b from-white/40 to-transparent animate-bounce"></div>
+  </div>
+</section>

@@ -1,0 +1,323 @@
+<!--
+  SECTION: sections/header.html
+  Shopify: {% section 'header' %}
+  
+  Features:
+  - Transparent on hero, opaque on scroll
+  - Mega menu (desktop)
+  - Mobile slide-in menu
+  - Search drawer
+  - Cart icon with item count
+-->
+
+<!-- ───────────────────────── CART DRAWER ───────────────────────── -->
+<div class="cart-overlay" data-cart-overlay aria-hidden="true"></div>
+
+<aside
+  class="cart-drawer"
+  data-cart-drawer
+  role="dialog"
+  aria-modal="true"
+  aria-label="Winkelwagen"
+>
+  <div class="flex flex-col h-full">
+    <!-- Header -->
+    <div class="flex items-center justify-between px-6 py-5 border-b border-bx-border">
+      <h2 class="text-lg font-bold">Winkelwagen</h2>
+      <button data-cart-close class="text-bx-muted hover:text-bx-black transition-colors" aria-label="Sluit winkelwagen">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Items (populated by Shopify AJAX cart JS) -->
+    <div class="flex-1 overflow-y-auto px-6 py-6" id="cart-items">
+      <!-- Empty state -->
+      <div class="flex flex-col items-center justify-center h-full text-center gap-4" id="cart-empty">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 text-bx-border" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+        </svg>
+        <p class="font-medium text-bx-muted">Je winkelwagen is leeg</p>
+        <a href="/collections/all" class="btn-primary btn">Bekijk fietsen</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="border-t border-bx-border px-6 py-6 space-y-3" id="cart-footer" style="display:none">
+      <div class="flex justify-between font-semibold text-base">
+        <span>Subtotaal</span>
+        <span id="cart-subtotal">€ 0,00</span>
+      </div>
+      <p class="text-xs text-bx-muted">Verzendkosten worden berekend bij de kassa</p>
+      <a href="/checkout" class="btn-primary btn w-full btn-lg justify-center">
+        Afrekenen
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      <a href="/cart" class="btn-outline btn w-full justify-center">Winkelwagen bekijken</a>
+    </div>
+  </div>
+</aside>
+
+<!-- ───────────────────────── MOBILE OVERLAY ───────────────────────── -->
+<div class="fixed inset-0 z-[98] bg-black/50 opacity-0 pointer-events-none transition-opacity duration-400 [&.open]:opacity-100 [&.open]:pointer-events-auto" data-mobile-overlay></div>
+
+<!-- ───────────────────────── MOBILE MENU ───────────────────────── -->
+<nav
+  class="fixed inset-y-0 left-0 z-[99] w-80 max-w-full bg-white shadow-2xl
+         -translate-x-full transition-transform duration-400 ease-premium
+         [&.open]:translate-x-0 overflow-y-auto"
+  data-mobile-menu
+  role="dialog"
+  aria-modal="true"
+  aria-label="Navigatie"
+>
+  <div class="flex items-center justify-between px-6 py-5 border-b border-bx-border">
+    <a href="/" class="font-black text-xl tracking-tighter" aria-label="Bikexpert home">
+      BIKE<span class="text-bx-accent">XPERT</span>
+    </a>
+    <button data-mobile-menu-close class="text-bx-muted hover:text-bx-black" aria-label="Menu sluiten">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6 6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <ul class="px-2 py-4 space-y-1">
+    <!-- E-bikes -->
+    <li>
+      <button
+        class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold hover:bg-bx-light transition-colors"
+        data-mobile-nav-parent
+        aria-expanded="false"
+      >
+        E-Bikes
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform [&~ul.open]:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <ul class="accordion-body pl-4 space-y-1" data-mobile-nav-sub>
+        <li><a href="/collections/city-ebikes" class="block px-4 py-2 text-sm text-bx-muted hover:text-bx-black rounded-lg hover:bg-bx-light transition-colors">City E-Bikes</a></li>
+        <li><a href="/collections/speed-pedelecs" class="block px-4 py-2 text-sm text-bx-muted hover:text-bx-black rounded-lg hover:bg-bx-light transition-colors">Speed Pedelecs</a></li>
+        <li><a href="/collections/mountain-ebikes" class="block px-4 py-2 text-sm text-bx-muted hover:text-bx-black rounded-lg hover:bg-bx-light transition-colors">Mountain E-Bikes</a></li>
+        <li><a href="/collections/cargo-ebikes" class="block px-4 py-2 text-sm text-bx-muted hover:text-bx-black rounded-lg hover:bg-bx-light transition-colors">Cargo E-Bikes</a></li>
+      </ul>
+    </li>
+    <!-- Reguliere fietsen -->
+    <li>
+      <button
+        class="w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold hover:bg-bx-light transition-colors"
+        data-mobile-nav-parent
+        aria-expanded="false"
+      >
+        Fietsen
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </button>
+      <ul class="accordion-body pl-4 space-y-1" data-mobile-nav-sub>
+        <li><a href="/collections/stadsfietsen" class="block px-4 py-2 text-sm text-bx-muted hover:text-bx-black rounded-lg hover:bg-bx-light transition-colors">Stadsfietsen</a></li>
+        <li><a href="/collections/racefiets" class="block px-4 py-2 text-sm text-bx-muted hover:text-bx-black rounded-lg hover:bg-bx-light transition-colors">Racefietsen</a></li>
+        <li><a href="/collections/mountainbike" class="block px-4 py-2 text-sm text-bx-muted hover:text-bx-black rounded-lg hover:bg-bx-light transition-colors">Mountainbikes</a></li>
+      </ul>
+    </li>
+    <li><a href="/collections/accessoires" class="block px-4 py-3 text-sm font-semibold rounded-xl hover:bg-bx-light transition-colors">Accessoires</a></li>
+    <li><a href="/pages/service" class="block px-4 py-3 text-sm font-semibold rounded-xl hover:bg-bx-light transition-colors">Service</a></li>
+    <li><a href="/pages/over-ons" class="block px-4 py-3 text-sm font-semibold rounded-xl hover:bg-bx-light transition-colors">Over Bikexpert</a></li>
+    <li><a href="/blogs/news" class="block px-4 py-3 text-sm font-semibold rounded-xl hover:bg-bx-light transition-colors">Blog</a></li>
+  </ul>
+
+  <div class="px-6 pb-8 pt-2 border-t border-bx-border mt-4">
+    <a href="/pages/contact" class="btn-primary btn w-full justify-center mb-3">Contact</a>
+    <div class="flex gap-3 text-sm text-bx-muted">
+      <a href="tel:+31781234567" class="hover:text-bx-black transition-colors">📞 078 123 45 67</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ───────────────────────── SITE HEADER ───────────────────────── -->
+<header
+  class="site-header transparent"
+  data-transparent="true"
+  role="banner"
+>
+  <!-- Announcement bar -->
+  {% render 'announcement-bar' %}
+
+  <!-- Main header bar -->
+  <div class="border-b border-white/10">
+    <div class="bx-container">
+      <div class="flex items-center justify-between h-16 lg:h-18">
+
+        <!-- Logo -->
+        <a href="/" class="font-black text-2xl tracking-tighter text-white z-10" aria-label="Bikexpert — Terug naar home">
+          BIKE<span class="text-bx-accent">XPERT</span>
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex items-center gap-8" aria-label="Hoofdnavigatie">
+
+          <!-- E-bikes (mega menu) -->
+          <div class="relative" data-mega-trigger="ebikes">
+            <button
+              class="nav-link text-white/90 hover:text-white py-6 flex items-center gap-1"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              E-Bikes
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+          </div>
+
+          <!-- Fietsen (mega menu) -->
+          <div class="relative" data-mega-trigger="fietsen">
+            <button
+              class="nav-link text-white/90 hover:text-white py-6 flex items-center gap-1"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Fietsen
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+          </div>
+
+          <a href="/collections/accessoires" class="nav-link text-white/90 hover:text-white py-6">Accessoires</a>
+          <a href="/pages/service" class="nav-link text-white/90 hover:text-white py-6">Service</a>
+          <a href="/pages/over-ons" class="nav-link text-white/90 hover:text-white py-6">Over ons</a>
+        </nav>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-3">
+          <!-- Search -->
+          <div class="relative" data-search-wrapper>
+            <button
+              class="w-10 h-10 flex items-center justify-center text-white/80 hover:text-white transition-colors rounded-full hover:bg-white/10"
+              aria-label="Zoeken"
+              id="search-toggle"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              </svg>
+            </button>
+            <!-- Search dropdown (toggled by JS) -->
+            <div class="hidden absolute right-0 top-full mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-bx-border overflow-hidden z-50" data-search-dropdown>
+              <div class="p-3 border-b border-bx-border">
+                <input
+                  type="search"
+                  placeholder="Zoek een fiets…"
+                  class="w-full px-4 py-2 text-sm bg-bx-light rounded-xl focus:outline-none"
+                  data-search-input
+                  autocomplete="off"
+                  aria-label="Zoeken"
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Cart -->
+          <button
+            class="relative w-10 h-10 flex items-center justify-center text-white/80 hover:text-white transition-colors rounded-full hover:bg-white/10"
+            data-cart-open
+            aria-label="Winkelwagen openen"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            <!-- Count badge — populated by Shopify cart JS -->
+            <span class="absolute -top-0.5 -right-0.5 w-4 h-4 bg-bx-accent text-bx-black text-[10px] font-bold rounded-full flex items-center justify-center hidden" id="cart-count">0</span>
+          </button>
+
+          <!-- CTA (desktop only) -->
+          <a href="/pages/contact" class="hidden lg:inline-flex btn-outline-white btn ml-2">
+            Bezoek showroom
+          </a>
+
+          <!-- Hamburger (mobile) -->
+          <button
+            class="lg:hidden w-10 h-10 flex items-center justify-center text-white/80 hover:text-white transition-colors"
+            data-mobile-menu-toggle
+            aria-label="Menu openen"
+            aria-expanded="false"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Mega menus ── -->
+
+  <!-- E-bikes mega menu -->
+  <div class="mega-menu" data-mega-menu="ebikes">
+    <div class="bx-container py-10">
+      <div class="grid grid-cols-4 gap-8">
+        <div>
+          <p class="section-label mb-4">Categorieën</p>
+          <ul class="space-y-2">
+            <li><a href="/collections/city-ebikes"     class="text-sm font-medium hover:text-bx-muted transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-bx-accent inline-block"></span> City E-Bikes</a></li>
+            <li><a href="/collections/speed-pedelecs"  class="text-sm font-medium hover:text-bx-muted transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-bx-accent inline-block"></span> Speed Pedelecs</a></li>
+            <li><a href="/collections/mountain-ebikes" class="text-sm font-medium hover:text-bx-muted transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-bx-accent inline-block"></span> Mountain E-Bikes</a></li>
+            <li><a href="/collections/cargo-ebikes"    class="text-sm font-medium hover:text-bx-muted transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-bx-accent inline-block"></span> Cargo E-Bikes</a></li>
+            <li><a href="/collections/kids-ebikes"     class="text-sm font-medium hover:text-bx-muted transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-bx-accent inline-block"></span> Kinder E-Bikes</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="section-label mb-4">Merken</p>
+          <ul class="space-y-2">
+            <li><a href="/collections/gazelle"   class="text-sm font-medium hover:text-bx-muted transition-colors">Gazelle</a></li>
+            <li><a href="/collections/batavus"   class="text-sm font-medium hover:text-bx-muted transition-colors">Batavus</a></li>
+            <li><a href="/collections/sparta"    class="text-sm font-medium hover:text-bx-muted transition-colors">Sparta</a></li>
+            <li><a href="/collections/giant"     class="text-sm font-medium hover:text-bx-muted transition-colors">Giant</a></li>
+            <li><a href="/collections/trek"      class="text-sm font-medium hover:text-bx-muted transition-colors">Trek</a></li>
+          </ul>
+        </div>
+        <div class="col-span-2">
+          <!-- Featured product teaser -->
+          <a href="/collections/e-bikes" class="group relative block rounded-2xl overflow-hidden aspect-video bg-bx-gray">
+            <img src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&q=80&auto=format" alt="E-bike showroom" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-600">
+            <div class="absolute inset-0 overlay-dark flex flex-col justify-end p-6">
+              <p class="text-white font-bold text-lg">Ontdek onze e-bikes</p>
+              <p class="text-white/70 text-sm mt-1">Meer dan 150 modellen in stock</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fietsen mega menu -->
+  <div class="mega-menu" data-mega-menu="fietsen">
+    <div class="bx-container py-10">
+      <div class="grid grid-cols-4 gap-8">
+        <div>
+          <p class="section-label mb-4">Type fiets</p>
+          <ul class="space-y-2">
+            <li><a href="/collections/stadsfietsen"  class="text-sm font-medium hover:text-bx-muted transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-bx-accent inline-block"></span> Stadsfietsen</a></li>
+            <li><a href="/collections/racefietsen"   class="text-sm font-medium hover:text-bx-muted transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-bx-accent inline-block"></span> Racefietsen</a></li>
+            <li><a href="/collections/mountainbikes" class="text-sm font-medium hover:text-bx-muted transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-bx-accent inline-block"></span> Mountainbikes</a></li>
+            <li><a href="/collections/kinderfietsen" class="text-sm font-medium hover:text-bx-muted transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-bx-accent inline-block"></span> Kinderfietsen</a></li>
+            <li><a href="/collections/vouwfietsen"   class="text-sm font-medium hover:text-bx-muted transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-bx-accent inline-block"></span> Vouwfietsen</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="section-label mb-4">Prijsklasse</p>
+          <ul class="space-y-2">
+            <li><a href="/collections/fietsen?filter.v.price.gte=0&filter.v.price.lte=500"    class="text-sm font-medium hover:text-bx-muted transition-colors">Tot € 500</a></li>
+            <li><a href="/collections/fietsen?filter.v.price.gte=500&filter.v.price.lte=1000" class="text-sm font-medium hover:text-bx-muted transition-colors">€ 500 – € 1.000</a></li>
+            <li><a href="/collections/fietsen?filter.v.price.gte=1000"                        class="text-sm font-medium hover:text-bx-muted transition-colors">€ 1.000+</a></li>
+          </ul>
+        </div>
+        <div class="col-span-2">
+          <a href="/collections/all" class="group relative block rounded-2xl overflow-hidden aspect-video bg-bx-gray">
+            <img src="https://images.unsplash.com/photo-1502744688674-c619d1586c9e?w=800&q=80&auto=format" alt="Fietsencollectie" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-600">
+            <div class="absolute inset-0 overlay-dark flex flex-col justify-end p-6">
+              <p class="text-white font-bold text-lg">Alle fietsen</p>
+              <p class="text-white/70 text-sm mt-1">Voor elk budget & rijstijl</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

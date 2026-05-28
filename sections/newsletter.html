@@ -1,0 +1,52 @@
+<!--
+  SECTION: sections/newsletter.html
+  Shopify: {% section 'newsletter' %}
+-->
+<section class="section bg-bx-light" aria-labelledby="newsletter-heading">
+  <div class="bx-container">
+    <div class="max-w-2xl mx-auto text-center">
+
+      <p class="section-label" data-animate>Blijf op de hoogte</p>
+      <h2 id="newsletter-heading" class="text-display-md font-black tracking-tight mt-2 text-balance" data-animate style="animation-delay:0.05s">
+        Exclusieve aanbiedingen & nieuws
+      </h2>
+      <p class="text-bx-muted text-lg mt-4 mb-8" data-animate style="animation-delay:0.1s">
+        Meld je aan en ontvang als eerste nieuws over nieuwe modellen, acties en tips.
+      </p>
+
+      <!-- Form — wire to Shopify customer newsletter / Klaviyo -->
+      <form
+        class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
+        data-animate
+        style="animation-delay:0.15s"
+        action="/contact#contact_form"
+        method="post"
+        id="newsletter-form"
+        aria-label="Nieuwsbrief aanmelden"
+      >
+        <input type="hidden" name="form_type" value="customer">
+        <input type="hidden" name="utf8" value="✓">
+        <label for="newsletter-email" class="sr-only">E-mailadres</label>
+        <input
+          id="newsletter-email"
+          type="email"
+          name="contact[email]"
+          placeholder="Jouw e-mailadres"
+          required
+          autocomplete="email"
+          class="flex-1 px-5 py-3.5 rounded-full border border-bx-border bg-white text-sm
+                 focus:outline-none focus:ring-2 focus:ring-bx-accent focus:border-transparent
+                 placeholder:text-bx-muted"
+        >
+        <button type="submit" class="btn-primary btn flex-shrink-0">
+          Aanmelden
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </form>
+
+      <p class="text-xs text-bx-muted mt-4" data-animate style="animation-delay:0.2s">
+        We sturen geen spam. Je kunt je op elk moment afmelden.
+      </p>
+    </div>
+  </div>
+</section>

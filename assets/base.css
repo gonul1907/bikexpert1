@@ -1,0 +1,233 @@
+/* =============================================================
+   BIKEXPERT — Base CSS
+   Shopify-ready: paste into assets/base.css
+   ============================================================= */
+
+/* ── Google Fonts (Inter) ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base layer ── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-bx-white text-bx-black font-sans;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-bx-accent text-bx-black;
+  }
+
+  img, video { @apply block w-full; }
+
+  a { @apply transition-colors duration-200; }
+
+  /* Focus ring — accessibility */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-bx-accent;
+  }
+}
+
+/* ── Component layer ── */
+@layer components {
+
+  /* Container */
+  .bx-container {
+    @apply w-full mx-auto px-5 sm:px-8 lg:px-12 max-w-screen-2xl;
+  }
+
+  /* ── Buttons ── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2
+           font-semibold text-sm tracking-wide
+           rounded-full px-7 py-3.5
+           transition-all duration-300 ease-premium
+           cursor-pointer select-none;
+  }
+
+  .btn-primary {
+    @apply btn bg-bx-black text-bx-white
+           hover:bg-bx-accent hover:text-bx-black;
+  }
+
+  .btn-accent {
+    @apply btn bg-bx-accent text-bx-black
+           hover:bg-bx-accent-h;
+  }
+
+  .btn-outline {
+    @apply btn bg-transparent text-bx-black border border-bx-black
+           hover:bg-bx-black hover:text-bx-white;
+  }
+
+  .btn-outline-white {
+    @apply btn bg-transparent text-bx-white border border-white/40
+           hover:bg-white hover:text-bx-black;
+  }
+
+  .btn-lg {
+    @apply px-10 py-4 text-base;
+  }
+
+  /* ── Badge ── */
+  .badge {
+    @apply inline-block text-xs font-semibold tracking-widest uppercase
+           px-3 py-1 rounded-full;
+  }
+  .badge-new    { @apply badge bg-bx-accent text-bx-black; }
+  .badge-sale   { @apply badge bg-red-500 text-white; }
+  .badge-top    { @apply badge bg-bx-black text-bx-white; }
+
+  /* ── Section spacing ── */
+  .section { @apply py-20 md:py-28 lg:py-36; }
+  .section-sm { @apply py-14 md:py-20; }
+
+  /* ── Section label ── */
+  .section-label {
+    @apply text-xs font-semibold tracking-[0.2em] uppercase text-bx-muted mb-4;
+  }
+
+  /* ── Announcement bar ── */
+  .announcement-bar {
+    @apply bg-bx-black text-bx-white text-xs font-medium
+           tracking-wide py-2.5 text-center;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    @apply fixed top-0 left-0 right-0 z-50
+           transition-all duration-400 ease-premium;
+  }
+
+  .site-header.scrolled {
+    @apply bg-white/95 backdrop-blur-md shadow-sm;
+  }
+
+  .site-header.transparent {
+    @apply bg-transparent;
+  }
+
+  /* ── Nav link ── */
+  .nav-link {
+    @apply text-sm font-medium tracking-wide
+           transition-colors duration-200
+           relative after:absolute after:bottom-0 after:left-0
+           after:h-0.5 after:w-0 after:bg-bx-accent
+           after:transition-all after:duration-300
+           hover:after:w-full;
+  }
+
+  /* ── Product card ── */
+  .product-card {
+    @apply relative bg-bx-light rounded-2xl overflow-hidden
+           transition-transform duration-400 ease-premium
+           hover:-translate-y-1;
+  }
+
+  .product-card__img {
+    @apply aspect-[4/3] overflow-hidden bg-bx-border;
+  }
+
+  .product-card__img img {
+    @apply w-full h-full object-cover
+           transition-transform duration-600 ease-premium
+           group-hover:scale-105;
+  }
+
+  .product-card__body {
+    @apply p-5;
+  }
+
+  /* ── Cart drawer ── */
+  .cart-drawer {
+    @apply fixed inset-y-0 right-0 z-[200] w-full max-w-md
+           bg-white shadow-2xl
+           translate-x-full transition-transform duration-400 ease-premium;
+  }
+
+  .cart-drawer.open {
+    @apply translate-x-0;
+  }
+
+  .cart-overlay {
+    @apply fixed inset-0 z-[199] bg-black/50
+           opacity-0 pointer-events-none
+           transition-opacity duration-400;
+  }
+
+  .cart-overlay.open {
+    @apply opacity-100 pointer-events-auto;
+  }
+
+  /* ── Mega menu ── */
+  .mega-menu {
+    @apply absolute top-full left-0 right-0 bg-white
+           shadow-2xl border-t border-bx-border
+           opacity-0 pointer-events-none translate-y-2
+           transition-all duration-300 ease-premium;
+  }
+
+  .mega-menu.open {
+    @apply opacity-100 pointer-events-auto translate-y-0;
+  }
+
+  /* ── Accordion ── */
+  .accordion-body {
+    @apply overflow-hidden max-h-0 transition-all duration-300 ease-premium;
+  }
+
+  .accordion-body.open {
+    max-height: 600px;
+  }
+
+  /* ── Marquee / brand slider ── */
+  .marquee-track {
+    @apply flex gap-16 items-center animate-marquee whitespace-nowrap;
+  }
+}
+
+/* ── Utilities ── */
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+
+  /* Gradient overlays */
+  .overlay-dark {
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.15) 0%,
+      rgba(0,0,0,0.65) 100%
+    );
+  }
+
+  .overlay-hero {
+    background: linear-gradient(
+      105deg,
+      rgba(0,0,0,0.72) 0%,
+      rgba(0,0,0,0.25) 60%,
+      transparent 100%
+    );
+  }
+
+  /* Scroll snap */
+  .snap-x-mandatory {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .snap-start { scroll-snap-align: start; }
+
+  /* Hide scrollbar */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
