@@ -1,0 +1,75 @@
+{%- assign featured_collection = collections[section.settings.collection] -%}
+
+<section class="section bg-bx-white" aria-labelledby="fp-heading">
+  <div class="bx-container">
+
+    <!-- Header -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div>
+        <p class="section-label" data-animate>{{ section.settings.label }}</p>
+        <h2 id="fp-heading" class="text-display-md font-black tracking-tight text-balance" data-animate style="animation-delay:0.05s">
+          {{ section.settings.title }}
+        </h2>
+      </div>
+      {%- if featured_collection != blank -%}
+      <a href="{{ featured_collection.url }}" class="btn-outline btn self-start md:self-auto flex-shrink-0" data-animate style="animation-delay:0.1s">
+        Alle producten bekijken
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      {%- endif -%}
+    </div>
+
+    <!-- Product grid -->
+    {%- if featured_collection != blank and featured_collection.products.size > 0 -%}
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
+        {%- render 'product-card', product: product -%}
+      {%- endfor -%}
+    </div>
+    {%- else -%}
+    <p class="text-center text-[#6b7280] py-12">
+      Stel een collectie in via de theme editor om producten te tonen.
+    </p>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Uitgelichte producten",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Bovenlabel",
+      "default": "Nieuwe collectie"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titel",
+      "default": "Uitgelichte producten"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collectie"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": "Aantal producten"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Uitgelichte producten"
+    }
+  ]
+}
+{% endschema %}
