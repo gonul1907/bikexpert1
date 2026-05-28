@@ -165,7 +165,7 @@
   </div><!-- end grid -->
 
   <!-- Description + Specs -->
-  <div style="margin-top:3.5rem; border-top:1px solid #eee; padding-top:2.5rem; display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:start;">
+  <div style="margin-top:3.5rem; border-top:1px solid #eee; padding-top:2.5rem; display:grid; grid-template-columns:1fr 380px; gap:3rem; align-items:start;">
 
     <!-- Description -->
     <div>
@@ -177,98 +177,123 @@
       {% endif %}
     </div>
 
-    <!-- Specs table -->
-    <div>
-      <h2 style="font-size:1.15rem; font-weight:900; color:#111; margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.04em;">Specificaties</h2>
-      <table style="width:100%; border-collapse:collapse; font-size:0.88rem;">
-        {% assign specs = "" %}
-        {% if product.metafields.custom.motor != blank %}
-        <tr style="border-bottom:1px solid #f0f0f0;">
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600; width:45%; white-space:nowrap;">Motor</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.motor }}</td>
-        </tr>
-        {% endif %}
-        {% if product.metafields.custom.accu != blank %}
-        <tr style="border-bottom:1px solid #f0f0f0;">
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Accu</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.accu }}</td>
-        </tr>
-        {% endif %}
-        {% if product.metafields.custom.actieradius != blank %}
-        <tr style="border-bottom:1px solid #f0f0f0;">
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Actieradius</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.actieradius }}</td>
-        </tr>
-        {% endif %}
-        {% if product.metafields.custom.max_snelheid != blank %}
-        <tr style="border-bottom:1px solid #f0f0f0;">
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Max. snelheid</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.max_snelheid }}</td>
-        </tr>
-        {% endif %}
-        {% if product.metafields.custom.wielmaat != blank %}
-        <tr style="border-bottom:1px solid #f0f0f0;">
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Wielmaat</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.wielmaat }}</td>
-        </tr>
-        {% endif %}
+    <!-- Specs table card -->
+    <div style="border:1px solid #e5e5e5; border-radius:10px; overflow:hidden; position:sticky; top:80px;">
+      <div style="background:#111; padding:0.85rem 1.1rem;">
+        <h2 style="font-size:1rem; font-weight:800; color:#fff; margin:0; letter-spacing:0.03em;">Specificaties</h2>
+      </div>
+      <table style="width:100%; border-collapse:collapse; font-size:0.86rem;">
         {% if product.metafields.custom.gewicht != blank %}
         <tr style="border-bottom:1px solid #f0f0f0;">
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Gewicht</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.gewicht }}</td>
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; width:45%; background:#fafafa;">Gewicht</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.gewicht }}</td>
         </tr>
         {% endif %}
-        {% if product.metafields.custom.max_belasting != blank %}
+        {% if product.vendor != blank %}
         <tr style="border-bottom:1px solid #f0f0f0;">
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Max. belasting</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.max_belasting }}</td>
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Merk</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.vendor }}</td>
         </tr>
         {% endif %}
-        {% if product.metafields.custom.remmen != blank %}
+        {% if product.metafields.custom.model != blank %}
         <tr style="border-bottom:1px solid #f0f0f0;">
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Remmen</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.remmen }}</td>
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Model</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.model }}</td>
         </tr>
         {% endif %}
-        {% if product.metafields.custom.versnellingen != blank %}
+        {% if product.type != blank %}
         <tr style="border-bottom:1px solid #f0f0f0;">
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Versnellingen</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.versnellingen }}</td>
-        </tr>
-        {% endif %}
-        {% if product.metafields.custom.instap != blank %}
-        <tr style="border-bottom:1px solid #f0f0f0;">
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Instap</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.instap }}</td>
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Type</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.type }}</td>
         </tr>
         {% endif %}
         {% if product.metafields.custom.kleur != blank %}
         <tr style="border-bottom:1px solid #f0f0f0;">
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Kleur</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.kleur }}</td>
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Kleur</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.kleur }}</td>
         </tr>
         {% endif %}
-        {% if product.metafields.custom.garantie != blank %}
-        <tr>
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Garantie</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">{{ product.metafields.custom.garantie }}</td>
-        </tr>
-        {% else %}
-        <tr>
-          <td style="padding:0.6rem 0.75rem 0.6rem 0; color:#888; font-weight:600;">Garantie</td>
-          <td style="padding:0.6rem 0; color:#111; font-weight:500;">1 jaar</td>
+        {% if product.metafields.custom.motor != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Motor</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.motor }}</td>
         </tr>
         {% endif %}
+        {% if product.metafields.custom.wielmaat != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Wielmaat</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.wielmaat }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.achterzit != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Achterzit</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.achterzit }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.actieradius != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Actieradius</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.actieradius }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.max_belasting != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Maximaal gewicht</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.max_belasting }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.remmen != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Soort remmen</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.remmen }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.instap != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Instap</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.instap }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.versnellingen != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Versnellingen</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.versnellingen }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.zadel != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Zadel</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.zadel }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.accu != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Accu</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.accu }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.max_snelheid != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Max. snelheid</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.max_snelheid }}</td>
+        </tr>
+        {% endif %}
+        {% if product.metafields.custom.afmeting_verpakking != blank %}
+        <tr style="border-bottom:1px solid #f0f0f0;">
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Afmeting verpakking</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{{ product.metafields.custom.afmeting_verpakking }}</td>
+        </tr>
+        {% endif %}
+        <tr>
+          <td style="padding:0.65rem 1rem; color:#666; font-weight:600; background:#fafafa;">Garantie</td>
+          <td style="padding:0.65rem 1rem; color:#111;">{% if product.metafields.custom.garantie != blank %}{{ product.metafields.custom.garantie }}{% else %}1 jaar{% endif %}</td>
+        </tr>
       </table>
     </div>
 
   </div>
 
-  <style>
-    @media (max-width: 768px) {
-      div[style*="grid-template-columns:1fr 1fr"]:last-of-type { grid-template-columns: 1fr !important; }
-    }
-  </style>
 
 </div>
 
