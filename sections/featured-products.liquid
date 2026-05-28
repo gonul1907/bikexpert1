@@ -1,20 +1,16 @@
-<!--
-  SECTION: sections/featured-products.html
-  Shopify: {% section 'featured-products' %}
--->
-<section class="section bg-bx-white" aria-labelledby="featured-heading">
+<section class="section bg-bx-white" aria-labelledby="collections-heading">
   <div class="bx-container">
 
     <!-- Header -->
     <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
       <div>
-        <p class="section-label" data-animate>Nieuwe collectie</p>
-        <h2 id="featured-heading" class="text-display-md font-black tracking-tight text-balance" data-animate style="animation-delay:0.05s">
-          Uitgelichte fietsen
+        <p class="section-label" data-animate>Shop per categorie</p>
+        <h2 id="collections-heading" class="text-display-md font-black tracking-tight text-balance" data-animate style="animation-delay:0.05s">
+          Uitgelichte collecties
         </h2>
       </div>
       <a href="/collections/all" class="btn-outline btn self-start md:self-auto flex-shrink-0" data-animate style="animation-delay:0.1s">
-        Alle fietsen bekijken
+        Alle collecties bekijken
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
       </a>
     </div>
@@ -22,75 +18,93 @@
     <!-- Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-      <!-- Card 1 -->
-      <article class="product-card" data-animate>
-        <a href="/products/gazelle-ultimate-c380-hms" class="product-card__img block relative">
-          <img src="https://images.unsplash.com/photo-1532298229144-0ec0c57515c7?w=600&q=80&auto=format" alt="Gazelle Ultimate C380 HMB" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-600 group-hover:scale-105">
-          <div class="absolute inset-0 flex items-end justify-center pb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <button class="btn-primary btn text-sm py-3 px-6 shadow-lg" data-cart-open>In winkelmand</button>
-          </div>
-          <div class="absolute top-4 left-4"><span class="badge-new">Nieuw</span></div>
-        </a>
-        <div class="product-card__body">
-          <p class="text-xs text-bx-muted font-medium uppercase tracking-widest mb-1">Gazelle</p>
-          <h3 class="font-semibold text-base leading-tight mb-2"><a href="/products/gazelle-ultimate-c380-hms" class="hover:text-bx-muted transition-colors">Ultimate C380 HMB</a></h3>
-          <div class="flex items-baseline gap-2"><span class="text-base font-bold">€ 3.499</span></div>
+      <!-- Jongensfietsen -->
+      <a href="/collections/jongensfietsen" class="group relative block rounded-2xl overflow-hidden aspect-[4/5] bg-bx-gray" data-animate>
+        <img
+          src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=600&q=80&auto=format&fit=crop"
+          alt="Jongensfietsen"
+          width="600" height="750"
+          loading="lazy" decoding="async"
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        >
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6">
+          <p class="text-xs text-bx-accent font-semibold uppercase tracking-widest mb-1">Collectie</p>
+          <h3 class="text-white font-black text-xl leading-tight mb-3">Jongensfietsen</h3>
+          <span class="inline-flex items-center gap-1.5 text-white text-sm font-semibold group-hover:gap-3 transition-all duration-300">
+            Bekijk collectie
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+          </span>
         </div>
-      </article>
+      </a>
 
-      <!-- Card 2 -->
-      <article class="product-card" data-animate style="animation-delay:0.07s">
-        <a href="/products/batavus-finez-e-go-super" class="product-card__img block relative">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format" alt="Batavus Finez E-Go Super" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-600 group-hover:scale-105">
-          <div class="absolute inset-0 flex items-end justify-center pb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <button class="btn-primary btn text-sm py-3 px-6 shadow-lg" data-cart-open>In winkelmand</button>
-          </div>
-        </a>
-        <div class="product-card__body">
-          <p class="text-xs text-bx-muted font-medium uppercase tracking-widest mb-1">Batavus</p>
-          <h3 class="font-semibold text-base leading-tight mb-2"><a href="/products/batavus-finez-e-go-super" class="hover:text-bx-muted transition-colors">Finez E-Go Super</a></h3>
-          <div class="flex items-baseline gap-2"><span class="text-base font-bold">€ 2.799</span><span class="text-sm text-bx-muted line-through">€ 2.999</span></div>
+      <!-- Meisjesfietsen -->
+      <a href="/collections/meisjesfietsen" class="group relative block rounded-2xl overflow-hidden aspect-[4/5] bg-bx-gray" data-animate style="animation-delay:0.07s">
+        <img
+          src="https://images.unsplash.com/photo-1520872024865-3ff2805d8bb3?w=600&q=80&auto=format&fit=crop"
+          alt="Meisjesfietsen"
+          width="600" height="750"
+          loading="lazy" decoding="async"
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        >
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6">
+          <p class="text-xs text-bx-accent font-semibold uppercase tracking-widest mb-1">Collectie</p>
+          <h3 class="text-white font-black text-xl leading-tight mb-3">Meisjesfietsen</h3>
+          <span class="inline-flex items-center gap-1.5 text-white text-sm font-semibold group-hover:gap-3 transition-all duration-300">
+            Bekijk collectie
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+          </span>
         </div>
-      </article>
+      </a>
 
-      <!-- Card 3 -->
-      <article class="product-card" data-animate style="animation-delay:0.14s">
-        <a href="/products/trek-domane-al-4" class="product-card__img block relative">
-          <img src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?w=600&q=80&auto=format" alt="Trek Domane AL 4" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-600 group-hover:scale-105">
-          <div class="absolute inset-0 flex items-end justify-center pb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <button class="btn-primary btn text-sm py-3 px-6 shadow-lg" data-cart-open>In winkelmand</button>
-          </div>
-          <div class="absolute top-4 left-4"><span class="badge-top">Bestseller</span></div>
-        </a>
-        <div class="product-card__body">
-          <p class="text-xs text-bx-muted font-medium uppercase tracking-widest mb-1">Trek</p>
-          <h3 class="font-semibold text-base leading-tight mb-2"><a href="/products/trek-domane-al-4" class="hover:text-bx-muted transition-colors">Domane AL 4</a></h3>
-          <div class="flex items-baseline gap-2"><span class="text-base font-bold">€ 1.849</span></div>
+      <!-- Fatbikes -->
+      <a href="/collections/fatbikes" class="group relative block rounded-2xl overflow-hidden aspect-[4/5] bg-bx-gray" data-animate style="animation-delay:0.14s">
+        <img
+          src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=600&q=80&auto=format&fit=crop"
+          alt="Fatbikes"
+          width="600" height="750"
+          loading="lazy" decoding="async"
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        >
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6">
+          <p class="text-xs text-bx-accent font-semibold uppercase tracking-widest mb-1">Collectie</p>
+          <h3 class="text-white font-black text-xl leading-tight mb-3">Fatbikes</h3>
+          <span class="inline-flex items-center gap-1.5 text-white text-sm font-semibold group-hover:gap-3 transition-all duration-300">
+            Bekijk collectie
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+          </span>
         </div>
-      </article>
+      </a>
 
-      <!-- Card 4 -->
-      <article class="product-card" data-animate style="animation-delay:0.21s">
-        <a href="/products/sparta-d-burst-m8b" class="product-card__img block relative">
-          <img src="https://images.unsplash.com/photo-1502744688674-c619d1586c9e?w=600&q=80&auto=format" alt="Sparta D-Burst M8B" width="600" height="450" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-600 group-hover:scale-105">
-          <div class="absolute inset-0 flex items-end justify-center pb-5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <button class="btn-primary btn text-sm py-3 px-6 shadow-lg" data-cart-open>In winkelmand</button>
-          </div>
-          <div class="absolute top-4 left-4"><span class="badge-sale">Sale</span></div>
-        </a>
-        <div class="product-card__body">
-          <p class="text-xs text-bx-muted font-medium uppercase tracking-widest mb-1">Sparta</p>
-          <h3 class="font-semibold text-base leading-tight mb-2"><a href="/products/sparta-d-burst-m8b" class="hover:text-bx-muted transition-colors">D-Burst M8B</a></h3>
-          <div class="flex items-baseline gap-2"><span class="text-base font-bold">€ 1.999</span><span class="text-sm text-bx-muted line-through">€ 2.299</span></div>
+      <!-- Vogue fietsen -->
+      <a href="/collections/vogue-fietsen" class="group relative block rounded-2xl overflow-hidden aspect-[4/5] bg-bx-gray" data-animate style="animation-delay:0.21s">
+        <img
+          src="https://images.unsplash.com/photo-1507035895480-2b3156c31fc8?w=600&q=80&auto=format&fit=crop"
+          alt="Vogue fietsen"
+          width="600" height="750"
+          loading="lazy" decoding="async"
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        >
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+        <div class="absolute bottom-0 left-0 right-0 p-6">
+          <p class="text-xs text-bx-accent font-semibold uppercase tracking-widest mb-1">Collectie</p>
+          <h3 class="text-white font-black text-xl leading-tight mb-3">Vogue fietsen</h3>
+          <span class="inline-flex items-center gap-1.5 text-white text-sm font-semibold group-hover:gap-3 transition-all duration-300">
+            Bekijk collectie
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+          </span>
         </div>
-      </article>
+      </a>
+
     </div>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Uitgelichte producten",
+  "name": "Uitgelichte collecties",
   "settings": []
 }
 {% endschema %}
