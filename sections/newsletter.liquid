@@ -1,53 +1,17 @@
-<!--
-  SECTION: sections/newsletter.html
-  Shopify: {% section 'newsletter' %}
--->
-<section class="section bg-bx-light" aria-labelledby="newsletter-heading">
-  <div class="bx-container">
-    <div class="max-w-2xl mx-auto text-center">
-
-      <p class="section-label" data-animate>Blijf op de hoogte</p>
-      <h2 id="newsletter-heading" class="text-display-md font-black tracking-tight mt-2 text-balance" data-animate style="animation-delay:0.05s">
-        Exclusieve aanbiedingen & nieuws
-      </h2>
-      <p class="text-bx-muted text-lg mt-4 mb-8" data-animate style="animation-delay:0.1s">
-        Meld je aan en ontvang als eerste nieuws over nieuwe modellen, acties en tips.
-      </p>
-
-      <!-- Form — wire to Shopify customer newsletter / Klaviyo -->
-      <form
-        class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-        data-animate
-        style="animation-delay:0.15s"
-        action="/contact#contact_form"
-        method="post"
-        id="newsletter-form"
-        aria-label="Nieuwsbrief aanmelden"
-      >
-        <input type="hidden" name="form_type" value="customer">
-        <input type="hidden" name="utf8" value="✓">
-        <label for="newsletter-email" class="sr-only">E-mailadres</label>
-        <input
-          id="newsletter-email"
-          type="email"
-          name="contact[email]"
-          placeholder="Jouw e-mailadres"
-          required
-          autocomplete="email"
-          class="flex-1 px-5 py-3.5 rounded-full border border-bx-border bg-white text-sm
-                 focus:outline-none focus:ring-2 focus:ring-bx-accent focus:border-transparent
-                 placeholder:text-bx-muted"
-        >
-        <button type="submit" class="btn-primary btn flex-shrink-0">
-          Aanmelden
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-      </form>
-
-      <p class="text-xs text-bx-muted mt-4" data-animate style="animation-delay:0.2s">
-        We sturen geen spam. Je kunt je op elk moment afmelden.
-      </p>
-    </div>
+<!-- -- Newsletter -- -->
+<section style="background:#111; padding:3rem 1.25rem;">
+  <div style="max-width:560px; margin:0 auto; text-align:center;">
+    <h2 style="font-size:1.5rem; font-weight:800; color:#fff; margin:0 0 0.5rem;">Altijd op de hoogte?</h2>
+    <p style="color:#aaa; margin:0 0 1.5rem; font-size:0.9rem;">Schrijf je in voor de nieuwsbrief en ontvang als eerste onze aanbiedingen.</p>
+    {% form 'customer' %}
+      {{ form.errors | default_errors }}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div style="display:flex; gap:0; border-radius:6px; overflow:hidden; border:1px solid #333;">
+        <input type="email" name="contact[email]" placeholder="Jouw e-mailadres" required autocomplete="email"
+          style="flex:1; padding:0.75rem 1rem; background:#1a1a1a; color:#fff; border:none; outline:none; font-size:0.9rem;">
+        <button type="submit" style="background:#b5f23d; color:#111; font-weight:700; padding:0.75rem 1.25rem; border:none; cursor:pointer; font-size:0.85rem; white-space:nowrap;">Inschrijven</button>
+      </div>
+    {% endform %}
   </div>
 </section>
 

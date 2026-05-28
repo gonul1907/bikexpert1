@@ -1,101 +1,50 @@
-<!--
-  SECTION: sections/hero.html
-  Shopify: {% section 'hero' %}
-
-  Full-bleed cinematic hero with:
-  - Video/poster background
-  - Headline + sub + dual CTA
-  - Scroll-down cue
--->
-<section class="relative min-h-screen flex items-center overflow-hidden bg-bx-dark" aria-label="Hero">
-
-  <!-- Background image / video poster -->
-  <div class="absolute inset-0">
-    <img
-      src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=1800&q=85&auto=format&fit=crop"
-      alt="Bikexpert — premium e-bikes in Zwijndrecht"
-      class="w-full h-full object-cover"
-      fetchpriority="high"
-      decoding="async"
-      width="1800"
-      height="1200"
-    >
-    <!-- Gradient overlay -->
-    <div class="absolute inset-0 overlay-hero"></div>
+<!-- ── USP bar ── -->
+<div style="background:#f2f2f2; border-bottom:1px solid #e0e0e0; font-size:0.8rem; font-weight:600; color:#333;">
+  <div style="max-width:1280px; margin:0 auto; padding:0 1.25rem; display:flex; flex-wrap:wrap; justify-content:center; gap:1.5rem; height:40px; align-items:center;">
+    <span>✔ 6 dagen per week open</span>
+    <span>✔ Niet goed? Geld terug</span>
+    <span>✔ Meer dan 1.000 fietsen op voorraad</span>
+    <span>✔ Korting tot wel 40%</span>
   </div>
+</div>
 
-  <!-- Content -->
-  <div class="relative bx-container py-32 pt-44 pb-24">
-    <div class="max-w-2xl">
-
-      <!-- Label -->
-      <div class="inline-flex items-center gap-2 mb-6" data-animate>
-        <span class="w-8 h-px bg-bx-accent"></span>
-        <span class="text-bx-accent text-xs font-semibold tracking-[0.2em] uppercase">Premium fietszaak · Zwijndrecht</span>
-      </div>
-
-      <!-- Headline -->
-      <h1
-        class="text-display-xl md:text-display-2xl font-black text-white leading-[1.0] tracking-tight text-balance mb-6"
-        data-animate
-        style="animation-delay: 0.1s"
-      >
-        Rij verder.<br>
-        Rij <span class="text-bx-accent">beter.</span>
-      </h1>
-
-      <!-- Subline -->
-      <p
-        class="text-white/70 text-lg md:text-xl leading-relaxed max-w-lg mb-10"
-        data-animate
-        style="animation-delay: 0.2s"
-      >
-        De beste e-bikes, racefietsen en service — allemaal onder één dak. Kom langs in onze showroom of bestel online.
-      </p>
-
-      <!-- CTAs -->
-      <div
-        class="flex flex-wrap gap-4"
-        data-animate
-        style="animation-delay: 0.3s"
-      >
-        <a href="/collections/ebikes" class="btn-accent btn btn-lg">
-          Bekijk e-bikes
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
-        </a>
-        <a href="/pages/proefrit" class="btn-outline-white btn btn-lg">
-          Proefrit aanvragen
-        </a>
-      </div>
-
-      <!-- Stats row -->
-      <div class="flex flex-wrap gap-10 mt-16 border-t border-white/15 pt-8">
-        <div>
-          <p class="text-3xl font-black text-white">150<span class="text-bx-accent">+</span></p>
-          <p class="text-xs text-white/50 uppercase tracking-widest mt-1">Modellen</p>
-        </div>
-        <div>
-          <p class="text-3xl font-black text-white">12<span class="text-bx-accent">+</span></p>
-          <p class="text-xs text-white/50 uppercase tracking-widest mt-1">Merken</p>
-        </div>
-        <div>
-          <p class="text-3xl font-black text-white">25<span class="text-bx-accent">jr</span></p>
-          <p class="text-xs text-white/50 uppercase tracking-widest mt-1">Ervaring</p>
-        </div>
-        <div>
-          <p class="text-3xl font-black text-white">9.4<span class="text-bx-accent">/10</span></p>
-          <p class="text-xs text-white/50 uppercase tracking-widest mt-1">Klantbeoordeling</p>
-        </div>
-      </div>
+<!-- ── Main hero banner ── -->
+<div style="position:relative; overflow:hidden; background:#111;">
+  <img
+    src="https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=1600&q=85&auto=format&fit=crop"
+    alt="Bikexpert — premium e-bikes"
+    style="width:100%; height:520px; object-fit:cover; opacity:0.65; display:block;"
+    fetchpriority="high"
+    width="1600" height="520"
+  >
+  <div style="position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:0 5%;">
+    <p style="color:#b5f23d; font-size:0.75rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.75rem;">Premium fietszaak · Zwijndrecht</p>
+    <h1 style="color:#fff; font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.1; margin:0 0 1rem; max-width:600px;">De beste prijs voor<br>de beste kwaliteit</h1>
+    <p style="color:rgba(255,255,255,0.8); font-size:1.05rem; margin-bottom:1.75rem; max-width:480px;">E-bikes, stadsfietsen, fatbikes en meer — direct uit voorraad leverbaar.</p>
+    <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
+      <a href="/collections/all" style="background:#b5f23d; color:#0a0a0a; font-weight:700; padding:0.85rem 2rem; border-radius:6px; text-decoration:none; font-size:0.95rem;">Bekijk alle fietsen</a>
+      <a href="/collections/elektrische-fiets" style="background:transparent; color:#fff; font-weight:600; padding:0.85rem 2rem; border-radius:6px; border:2px solid rgba(255,255,255,0.6); text-decoration:none; font-size:0.95rem;">E-bikes</a>
     </div>
   </div>
+</div>
 
-  <!-- Scroll cue -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
-    <span class="text-[10px] uppercase tracking-[0.2em]">Scroll</span>
-    <div class="w-px h-10 bg-gradient-to-b from-white/40 to-transparent animate-bounce"></div>
-  </div>
-</section>
+<!-- ── Sub-banners ── -->
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:4px; background:#ddd;">
+  <a href="/collections/damesfiets" style="position:relative; display:block; overflow:hidden;">
+    <img src="https://images.unsplash.com/photo-1520872024865-3ff2805d8bb3?w=800&q=80&auto=format&fit=crop" alt="Damesfietsen" style="width:100%; height:220px; object-fit:cover; display:block; transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+    <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(0,0,0,0.65),transparent); padding:1.25rem 1.5rem;">
+      <p style="color:#fff; font-weight:800; font-size:1.1rem; margin:0 0 0.25rem;">Damesfietsen</p>
+      <span style="color:#b5f23d; font-size:0.82rem; font-weight:600;">Bekijk →</span>
+    </div>
+  </a>
+  <a href="/collections/herenfiets" style="position:relative; display:block; overflow:hidden;">
+    <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?w=800&q=80&auto=format&fit=crop" alt="Herenfietsen" style="width:100%; height:220px; object-fit:cover; display:block; transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+    <div style="position:absolute; bottom:0; left:0; right:0; background:linear-gradient(to top, rgba(0,0,0,0.65),transparent); padding:1.25rem 1.5rem;">
+      <p style="color:#fff; font-weight:800; font-size:1.1rem; margin:0 0 0.25rem;">Herenfietsen</p>
+      <span style="color:#b5f23d; font-size:0.82rem; font-weight:600;">Bekijk →</span>
+    </div>
+  </a>
+</div>
 
 {% schema %}
 {
