@@ -8,7 +8,8 @@
     "build": "npm run tw:build && vite build",
     "preview": "vite preview",
     "tw:watch": "npx tailwindcss -i assets/base.css -o assets/main.css --watch",
-    "tw:build": "npx tailwindcss -i assets/base.css -o assets/main.css --minify"
+    "tw:build": "npx tailwindcss -i assets/base.css -o assets/main.css --minify",
+    "push": "node push.js"
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
