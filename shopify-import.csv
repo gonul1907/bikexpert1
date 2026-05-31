@@ -1140,3 +1140,73 @@ windgoo-e20-light-coffee,,,,,,,,Light Coffee,,0,shopify,10,deny,manual,899.00,99
 windgoo-e20-pro,Windgoo E20 Pro,,Windgoo,Fatbike,windgoo;fatbike,true,Title,Standaard,,0,shopify,10,deny,manual,999.00,1299.00,true,true,g,active
 windgoo-f21-pro,Windgoo F21 Pro,,Windgoo,Fatbike,windgoo;fatbike,true,Title,Standaard,,0,shopify,10,deny,manual,999.00,1299.00,true,true,g,active
 windgoo-f22-pro,Windgoo F22 Pro,,Windgoo,Fatbike,windgoo;fatbike,true,Title,Standaard,,0,shopify,10,deny,manual,1099.00,1299.00,true,true,g,active
+vogue-artemis,VOGUE ARTEMIS,"<p>Stijlvolle e-bike met krachtige middenmotor en geintegreerde accu. Inclusief voorrek en vouwslot. Hydraulische schijfremmen.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Matt-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-artemis,,,,,,,,Matt-Green,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-artemis,,,,,,,,Matt-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-avalanche,VOGUE AVALANCHE,"<p>Gezins e-bike met lage instap en riemaandrijving. Geschikt voor twee kinderen. Stabiel en veilig voor dagelijks gebruik.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets,gezinsfiets",FALSE,Kleur,Matt-Cool-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-avalanche,,,,,,,,Matt-Cement-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-basic-3,VOGUE BASIC 3,"<p>Instapmodel e-bike met voorwielmotor en Shimano Nexus 3 versnellingen. Actieradius tot 100 km. Verend frame voor extra rijcomfort.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Matt-Black-Brown,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-basic-3,,,,,,,,Matt-Black-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-basic-3,,,,,,,,Matt-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-basic-3,,,,,,,,Silk-Blue,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-basic-3,,,,,,,,Green,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-elite-3,VOGUE ELITE 3,"<p>Tijdloze e-bike met voorwielmotor en Shimano Nexus 3 versnellingen. Modern design in vier kleuren. Geintegreerde LED-verlichting.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Matt-Black-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-elite-3,,,,,,,,Matt-Black-Brown,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-elite-3,,,,,,,,Jeans-Blue,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-elite-3,,,,,,,,Mint-Blue,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-elite-7,VOGUE ELITE 7,"<p>Klassieke e-bike met voorwielmotor en Shimano Nexus 7 versnellingen. Tijdloos comfort in vier kleuren. Geintegreerde LED-verlichting.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Matt-Black-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-elite-7,,,,,,,,Matt-Black-Brown,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-elite-7,,,,,,,,Jeans-Blue,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-elite-7,,,,,,,,Mint-Blue,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-mestengo-mid,VOGUE MESTENGO MID,"<p>E-bike met middenmotor en hoge actieradius (70-120 km). Shimano 8 versnellingen. Verende voorvork en zadelpen voor optimaal rijcomfort.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Shine-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-mestengo-mid,,,,,,,,Matt-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-mestengo-mid,,,,,,,,Matt-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-mestengo-mid,,,,,,,,Dark-Blue,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-milo,VOGUE MILO,"<p>AD Fietstest winnaar 2026 (stadsfietsen). Lage instap e-bike met soepele trapondersteuning. Inclusief voorrek en vouwslot.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets,testwinnaar",FALSE,Kleur,Fashion-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-milo,,,,,,,,Matt-Tiffany-Blue,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-milo,,,,,,,,Matt-Lily-Green,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-milo-man,VOGUE MILO MAN,"<p>E-bike met soepele trapondersteuning voor dagelijks gebruik. Inclusief voorrek en vouwslot. Comfortabel en betrouwbaar.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Shiny-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-milo-man,,,,,,,,Matt-Titanium-Gray,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-mini,VOGUE MINI,"<p>Compacte e-bike met achterwielmotor en 6 versnellingen. Schijfremmen voor optimale veiligheid. Licht en wendbaar.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Matt-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-mini,,,,,,,,Fashion-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-mini,,,,,,,,Dark-Blue,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-motion,VOGUE MOTION,"<p>Stijlvolle lage instap e-bike met achterwielmotor en geintegreerde accu. Modern minimalistisch design voor dagelijks gebruik.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Matt-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-motion,,,,,,,,Matt-Cement-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-motion,,,,,,,,Titanium-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-motion,,,,,,,,Sand-White,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-motion-man,VOGUE MOTION MAN,"<p>E-bike met achterwielmotor en geintegreerde accu. Strak en minimalistisch design voor woon-werkverkeer.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Matt-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-motion-man,,,,,,,,Matt-Titanium-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-pantheon,VOGUE PANTHEON,"<p>Comfortabele e-bike met middenmotor en geintegreerde accu. Hydraulische schijfremmen en bagagedrager. Ideaal voor stad en recreatief gebruik.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Matt-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-pantheon,,,,,,,,Matt-Grey-Blue,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-premium,VOGUE PREMIUM,"<p>Premium e-bike met voorwielmotor en 7 versnellingen. Actieradius tot 120 km. Shimano Rollerbrake remmen voor en achter.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Matt-Brown,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-premium,,,,,,,,Matt-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-premium,,,,,,,,Matt-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-premium,,,,,,,,Champagne,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-premium-man,VOGUE PREMIUM MAN,"<p>E-bike voor mannen met voorwielmotor en 7 versnellingen. Hoge instap voor lange afstanden en woon-werkverkeer.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Matt-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-premium-man,,,,,,,,Matt-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-prestige,VOGUE PRESTIGE,"<p>Lage instap e-bike met krachtige middenmotor en geintegreerde accu. Hydraulische schijfremmen en verende voorvork voor maximaal comfort.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Matt-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-prestige,,,,,,,,Matt-Cool-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-prestige,,,,,,,,Matt-Fashion-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-prestige-man,VOGUE PRESTIGE MAN,"<p>E-bike met middenmotor en geintegreerde accu. Hydraulische schijfremmen en verende voorvork. Ideaal voor woon-werkverkeer.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets",FALSE,Kleur,Matt-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-prestige-man,,,,,,,,Matt-Cement-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-suv,VOGUE SUV,"<p>Veelzijdige e-bike met krachtige middenmotor. Hydraulische schijfremmen en verende voorvork. Geschikt voor stad en natuur.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets,offroad",FALSE,Kleur,Matt-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-suv,,,,,,,,Matt-Titanium-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-wonder,VOGUE WONDER,"<p>Gezins e-bike met lage instap en grote mand voorop. Lange achterdrager voor twee kinderen. Breed en stabiel voor dagelijks gebruik.",Vogue,Elektrische fiets,"e-bike,vogue,elektrische-fiets,gezinsfiets",FALSE,Kleur,Fashion-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-wonder,,,,,,,,Matt-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-avenger,VOGUE AVENGER,"<p>Elektrische bakfiets met krachtige middenmotor (ANANDA M100). Hydraulische schijfremmen. Belastbaar tot 300 kg. Shimano 8 versnellingen.",Vogue,Elektrische bakfiets,"e-bakfiets,vogue,bakfiets",FALSE,Kleur,Matt-Black-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-avenger,,,,,,,,Matt-Black-Brown,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-caddy,VOGUE CADDY,"<p>Elektrische driewiel bakfiets voor gezin en werk. Extra stabiel dankzij drie wielen. Ruimte voor kinderen en boodschappen.",Vogue,Elektrische bakfiets,"e-bakfiets,vogue,bakfiets,driewiel",FALSE,Kleur,Matt-Black-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-caddy,,,,,,,,Matt-Black-Brown,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-carry-2,VOGUE CARRY 2,"<p>Elektrische bakfiets met middenmotor en Shimano Nexus 8 versnellingen. Actieradius 50-70 km. Stabiele laadbak voor kinderen.",Vogue,Elektrische bakfiets,"e-bakfiets,vogue,bakfiets",FALSE,Kleur,Matt-Black-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-carry-2,,,,,,,,Matt-Black-Brown,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-carry-2,,,,,,,,Matt-Black-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-carry-3,VOGUE CARRY 3,"<p>Elektrische bakfiets met Bafang middenmotor. Belastbaar tot 220 kg. Beste koop 2021. Shimano Nexus 7 versnellingen.",Vogue,Elektrische bakfiets,"e-bakfiets,vogue,bakfiets",FALSE,Kleur,Matt-Black-Brown,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-carry-3,,,,,,,,Matt-Black-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-journey-plus,VOGUE JOURNEY PLUS,"<p>Elektrische driewiel bakfiets voor gezinnen. Maximale stabiliteit zonder balanceren. Ruime bak met hoge zijkanten.",Vogue,Elektrische bakfiets,"e-bakfiets,vogue,bakfiets,driewiel",FALSE,Kleur,Matt-Black-Brown,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-journey-plus,,,,,,,,Matt-Black-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-journey-s,VOGUE JOURNEY-S,"<p>Elektrische driewiel bakfiets voor werk en gezin. Lage instap en stabiele constructie. Beschikbaar in vier kleuren.",Vogue,Elektrische bakfiets,"e-bakfiets,vogue,bakfiets,driewiel",FALSE,Kleur,Matt-Black-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-journey-s,,,,,,,,Matt-Black-Brown,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-journey-s,,,,,,,,Matt-Tiffany-Blue,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-journey-s,,,,,,,,Matt-Fashion-Grey,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
+vogue-superior-deluxe,VOGUE SUPERIOR DELUXE,"<p>Elektrische bakfiets met middenmotor en extra brede achterwielen. Ruime laadbak voor kinderen. Beste koop 2022.",Vogue,Elektrische bakfiets,"e-bakfiets,vogue,bakfiets",FALSE,Kleur,Matt-Black-Brown,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,draft
+vogue-superior-deluxe,,,,,,,,Matt-Black-Black,,0,shopify,10,deny,manual,0.00,,TRUE,TRUE,kg,
