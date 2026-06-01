@@ -7,16 +7,41 @@
     {%- if collection.description != blank -%}
     <div class="mt-3 text-[#6b7280] max-w-2xl">{{ collection.description }}</div>
     {%- endif -%}
-    <p class="mt-2 text-sm text-[#6b7280]">{{ collection.products_count }} producten</p>
+    <p class="mt-2 text-sm text-[#6b7280]" id="bx-product-count">{{ collection.products_count }} producten</p>
   </div>
 
-  <!-- Product grid -->
   {%- if collection.products.size > 0 -%}
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-    {%- for product in collection.products -%}
-      {%- render 'product-card', product: product -%}
+
+  <!-- Merkfilters -->
+  {%- assign vendors = collection.products | map: 'vendor' | uniq | sort -%}
+  {%- if vendors.size > 1 -%}
+  <div class="flex flex-wrap gap-2 mb-8" id="bx-filters">
+    <button
+      class="bx-filter-btn px-4 py-2 rounded-full text-sm font-semibold border-2 border-[#0a0a0a] bg-[#0a0a0a] text-white transition-all duration-200"
+      data-vendor="all"
+      onclick="bxFilter(this)"
+    >Alle merken</button>
+    {%- for vendor in vendors -%}
+    <button
+      class="bx-filter-btn px-4 py-2 rounded-full text-sm font-semibold border-2 border-[#e5e7eb] bg-white text-[#0a0a0a] hover:border-[#0a0a0a] transition-all duration-200"
+      data-vendor="{{ vendor | escape }}"
+      onclick="bxFilter(this)"
+    >{{ vendor }}</button>
     {%- endfor -%}
   </div>
+  {%- endif -%}
+
+  <!-- Product grid -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="bx-product-grid">
+    {%- for product in collection.products -%}
+    <div class="bx-product-item" data-vendor="{{ product.vendor | escape }}">
+      {%- render 'product-card', product: product -%}
+    </div>
+    {%- endfor -%}
+  </div>
+
+  <!-- Geen resultaten bij filter -->
+  <p class="hidden py-16 text-center text-[#6b7280]" id="bx-no-results">Geen producten gevonden voor dit merk.</p>
 
   <!-- Pagination -->
   {%- if paginate.pages > 1 -%}
@@ -24,6 +49,40 @@
     {{- paginate | default_pagination -}}
   </div>
   {%- endif -%}
+
+  <script>
+    function bxFilter(btn) {
+      var vendor = btn.getAttribute('data-vendor');
+      var items = document.querySelectorAll('.bx-product-item');
+      var visible = 0;
+
+      items.forEach(function(item) {
+        if (vendor === 'all' || item.getAttribute('data-vendor') === vendor) {
+          item.style.display = '';
+          visible++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      // Update actieve knop
+      document.querySelectorAll('.bx-filter-btn').forEach(function(b) {
+        if (b === btn) {
+          b.classList.add('bg-[#0a0a0a]', 'text-white', 'border-[#0a0a0a]');
+          b.classList.remove('bg-white', 'text-[#0a0a0a]', 'border-[#e5e7eb]');
+        } else {
+          b.classList.remove('bg-[#0a0a0a]', 'text-white', 'border-[#0a0a0a]');
+          b.classList.add('bg-white', 'text-[#0a0a0a]', 'border-[#e5e7eb]');
+        }
+      });
+
+      // Update teller en lege staat
+      var countEl = document.getElementById('bx-product-count');
+      if (countEl) countEl.textContent = visible + ' producten';
+      var noResults = document.getElementById('bx-no-results');
+      if (noResults) noResults.classList.toggle('hidden', visible > 0);
+    }
+  </script>
 
   {%- else -%}
   <div class="py-24 text-center">
