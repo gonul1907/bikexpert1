@@ -106,6 +106,27 @@
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
         Zoeken
       </button>
+      <!-- Account -->
+      {%- if customer -%}
+      <div class="bx-dropdown" style="position:relative;">
+        <button class="bx-dropdown-btn" aria-label="Mijn account" style="background:none; border:1px solid #ddd; border-radius:6px; padding:0.45rem 0.75rem; cursor:pointer; display:flex; align-items:center; gap:0.4rem; color:#555; font-size:0.82rem; font-weight:600; transition:border-color 0.2s; font-family:inherit;" onmouseover="this.style.borderColor='#aaa'" onmouseout="this.style.borderColor='#ddd'">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          {{ customer.first_name }}
+        </button>
+        <div class="bx-dropdown-menu" style="display:none; position:absolute; top:100%; right:0; background:#fff; border:1px solid #e5e5e5; border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,0.1); min-width:190px; z-index:300; padding:0.4rem 0; margin-top:4px;">
+          <a href="/account" style="display:block; padding:0.6rem 1rem; color:#333; font-weight:600; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.background='#f7f7f7'" onmouseout="this.style.background='transparent'">Mijn account</a>
+          <a href="/account/orders" style="display:block; padding:0.6rem 1rem; color:#555; font-weight:500; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.background='#f7f7f7'" onmouseout="this.style.background='transparent'">Bestellingen</a>
+          <a href="/account/addresses" style="display:block; padding:0.6rem 1rem; color:#555; font-weight:500; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.background='#f7f7f7'" onmouseout="this.style.background='transparent'">Adressen</a>
+          <div style="height:1px; background:#f0f0f0; margin:0.3rem 0;"></div>
+          <a href="/account/logout" style="display:block; padding:0.6rem 1rem; color:#e53935; font-weight:600; font-size:0.85rem; text-decoration:none;" onmouseover="this.style.background='#f7f7f7'" onmouseout="this.style.background='transparent'">Uitloggen</a>
+        </div>
+      </div>
+      {%- else -%}
+      <a href="/account/login" aria-label="Inloggen" style="background:none; border:1px solid #ddd; border-radius:6px; padding:0.45rem 0.75rem; text-decoration:none; display:flex; align-items:center; gap:0.4rem; color:#555; font-size:0.82rem; font-weight:600; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#aaa'" onmouseout="this.style.borderColor='#ddd'">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Inloggen
+      </a>
+      {%- endif -%}
       <!-- Cart -->
       <a href="/cart" style="position:relative; background:#111; color:#fff; border-radius:6px; padding:0.5rem 0.9rem; text-decoration:none; display:flex; align-items:center; gap:0.4rem; font-size:0.82rem; font-weight:700; transition:background 0.2s;" onmouseover="this.style.background='#333'" onmouseout="this.style.background='#111'" aria-label="Winkelwagen">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
@@ -167,6 +188,21 @@
     <a href="/collections/meisjesfietsen-20-inch" style="display:block; padding:0.45rem 1.25rem 0.45rem 2.5rem; color:#666; font-weight:500; font-size:0.82rem; text-decoration:none; border-bottom:1px solid #f2f2f2; background:#fafafa;">20 inch</a>
     <a href="/collections/meisjesfietsen-24-inch" style="display:block; padding:0.45rem 1.25rem 0.45rem 2.5rem; color:#666; font-weight:500; font-size:0.82rem; text-decoration:none; border-bottom:1px solid #f2f2f2; background:#fafafa;">24 inch</a>
     <a href="/collections/meisjesfietsen-26-inch" style="display:block; padding:0.45rem 1.25rem 0.45rem 2.5rem; color:#666; font-weight:500; font-size:0.82rem; text-decoration:none; background:#fafafa;">26 inch</a>
+    <!-- Account mobiel -->
+    {%- if customer -%}
+    <a href="/account" style="display:block; padding:0.75rem 1.25rem; color:#333; font-weight:600; font-size:0.9rem; text-decoration:none; border-top:1px solid #f2f2f2; border-bottom:1px solid #f2f2f2; display:flex; align-items:center; gap:0.5rem;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Mijn account ({{ customer.first_name }})
+    </a>
+    <a href="/account/orders" style="display:block; padding:0.6rem 1.25rem 0.6rem 2rem; color:#666; font-weight:500; font-size:0.85rem; text-decoration:none; border-bottom:1px solid #f2f2f2; background:#fafafa;">↳ Bestellingen</a>
+    <a href="/account/addresses" style="display:block; padding:0.6rem 1.25rem 0.6rem 2rem; color:#666; font-weight:500; font-size:0.85rem; text-decoration:none; border-bottom:1px solid #f2f2f2; background:#fafafa;">↳ Adressen</a>
+    <a href="/account/logout" style="display:block; padding:0.6rem 1.25rem 0.6rem 2rem; color:#e53935; font-weight:600; font-size:0.85rem; text-decoration:none; border-bottom:1px solid #f2f2f2; background:#fafafa;">↳ Uitloggen</a>
+    {%- else -%}
+    <a href="/account/login" style="display:block; padding:0.75rem 1.25rem; color:#333; font-weight:600; font-size:0.9rem; text-decoration:none; border-top:1px solid #f2f2f2; border-bottom:1px solid #f2f2f2; display:flex; align-items:center; gap:0.5rem;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Inloggen / Account
+    </a>
+    {%- endif -%}
   </nav>
 </header>
 
