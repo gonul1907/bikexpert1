@@ -1,0 +1,114 @@
+<!-- -- Aanbiedingen sectie -- -->
+{%- assign col = collections[section.settings.collection] -%}
+{%- assign sale_products = col.products | where: 'available' -%}
+
+<section style="background:#0a0a0a; padding:3rem 0; border-top:1px solid #1a1a1a;">
+  <div style="max-width:1280px; margin:0 auto; padding:0 1.25rem;">
+
+    <!-- Header -->
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:2rem; flex-wrap:wrap; gap:0.75rem;">
+      <div>
+        <p style="font-size:0.72rem; font-weight:700; color:#e53935; text-transform:uppercase; letter-spacing:0.15em; margin:0 0 0.4rem;">&#128293; Tijdelijk afgeprijsd</p>
+        <h2 style="font-size:1.6rem; font-weight:900; color:#fff; letter-spacing:-0.03em; margin:0;">
+          {%- if section.settings.title != blank -%}{{ section.settings.title }}{%- else -%}Aanbiedingen{%- endif -%}
+        </h2>
+      </div>
+      {%- if col != blank -%}
+      <a href="{{ col.url }}" style="font-size:0.85rem; font-weight:600; color:#b5f23d; text-decoration:none; display:inline-flex; align-items:center; gap:0.3rem;">
+        Bekijk alle aanbiedingen
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      {%- endif -%}
+    </div>
+
+    {%- if col != blank -%}
+      {%- assign shown = 0 -%}
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(210px,1fr)); gap:1.25rem;">
+        {%- for product in col.products limit: 24 -%}
+          {%- if product.compare_at_price > product.price and product.available -%}
+            {%- if shown < section.settings.products_to_show -%}
+              {%- assign discount = product.compare_at_price | minus: product.price | times: 100 | divided_by: product.compare_at_price -%}
+              <div style="background:#fff; border-radius:10px; overflow:hidden; display:flex; flex-direction:column; position:relative; transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 24px rgba(0,0,0,0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+
+                <!-- Discount badge -->
+                <div style="position:absolute; top:10px; left:10px; background:#e53935; color:#fff; font-size:0.7rem; font-weight:800; padding:4px 9px; border-radius:5px; letter-spacing:0.04em; z-index:1;">
+                  -{{ discount }}%
+                </div>
+
+                <a href="{{ product.url }}" style="display:block; overflow:hidden;">
+                  {%- if product.featured_image -%}
+                  <img
+                    src="{{ product.featured_image | image_url: width: 600 }}"
+                    alt="{{ product.featured_image.alt | escape }}"
+                    width="600" height="600"
+                    style="width:100%; height:220px; object-fit:cover; transition:transform 0.4s; display:block;"
+                    loading="lazy" decoding="async"
+                    onmouseover="this.style.transform='scale(1.05)'"
+                    onmouseout="this.style.transform='scale(1)'"
+                  >
+                  {%- else -%}
+                  <div style="width:100%; height:220px; background:#f3f3f3; display:flex; align-items:center; justify-content:center; color:#bbb; font-size:0.8rem;">Geen afbeelding</div>
+                  {%- endif -%}
+                </a>
+
+                <div style="padding:0.85rem; flex:1; display:flex; flex-direction:column;">
+                  {%- if product.vendor != blank -%}
+                  <p style="font-size:0.72rem; font-weight:700; color:#0066cc; text-transform:uppercase; letter-spacing:0.08em; margin:0 0 0.3rem;">{{ product.vendor }}</p>
+                  {%- endif -%}
+                  <a href="{{ product.url }}" style="text-decoration:none; color:#111; font-weight:700; font-size:0.875rem; line-height:1.35; flex:1; display:block; margin-bottom:0.5rem;">{{ product.title }}</a>
+                  <div>
+                    <p style="font-size:0.75rem; color:#999; margin:0;">Was <s>{{ product.compare_at_price | money }}</s></p>
+                    <p style="font-size:1.05rem; font-weight:900; color:#e53935; margin:0.1rem 0 0;">Nu {{ product.price | money }}</p>
+                  </div>
+                  <a href="{{ product.url }}" style="display:block; margin-top:0.75rem; background:#b5f23d; color:#111; font-size:0.8rem; font-weight:700; padding:0.55rem; border-radius:5px; text-align:center; text-decoration:none; transition:background 0.2s;" onmouseover="this.style.background='#111'; this.style.color='#fff'" onmouseout="this.style.background='#b5f23d'; this.style.color='#111'">Bekijk aanbieding</a>
+                </div>
+              </div>
+              {%- assign shown = shown | plus: 1 -%}
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if shown == 0 -%}
+      <p style="color:#555; font-size:0.9rem; text-align:center; padding:2rem 0;">Momenteel geen aanbiedingen. Kom later terug!</p>
+      {%- endif -%}
+
+    {%- else -%}
+    <p style="color:#555; font-size:0.9rem;">Stel een collectie in via de Theme Editor.</p>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Aanbiedingen",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titel",
+      "default": "Aanbiedingen"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collectie (met sale-producten)"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 8,
+      "label": "Max. aantal producten"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Aanbiedingen"
+    }
+  ]
+}
+{% endschema %}
