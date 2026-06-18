@@ -96,7 +96,7 @@
       <!-- Search -->
       <button id="search-toggle" aria-label="Zoeken" style="background:none; border:1px solid #ddd; border-radius:6px; padding:0.45rem 0.75rem; cursor:pointer; display:flex; align-items:center; gap:0.4rem; color:#555; font-size:0.82rem; font-weight:600; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#aaa'" onmouseout="this.style.borderColor='#ddd'">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        Zoeken
+        <span class="btn-label">Zoeken</span>
       </button>
       <!-- Account -->
       {%- if customer -%}
@@ -116,7 +116,7 @@
       {%- else -%}
       <a href="/account/login" aria-label="Inloggen" style="background:none; border:1px solid #ddd; border-radius:6px; padding:0.45rem 0.75rem; text-decoration:none; display:flex; align-items:center; gap:0.4rem; color:#555; font-size:0.82rem; font-weight:600; transition:border-color 0.2s;" onmouseover="this.style.borderColor='#aaa'" onmouseout="this.style.borderColor='#ddd'">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Inloggen
+        <span class="btn-label">Inloggen</span>
       </a>
       {%- endif -%}
       <!-- Cart -->
@@ -194,6 +194,8 @@
   @media (max-width: 860px) {
     #site-header nav:not(#mobile-menu) { display:none !important; }
     #mobile-menu-btn { display:flex !important; }
+    .btn-label { display:none !important; }
+    #search-toggle { padding:0.45rem 0.6rem !important; }
   }
 </style>
 
