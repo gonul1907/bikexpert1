@@ -1,48 +1,55 @@
-<div class="bx-container py-16">
+﻿{%- comment -%} Parse tag groups uit collection.all_tags {%- endcomment -%}
+{%- assign _geslacht = "" -%}
+{%- assign _maat = "" -%}
+{%- assign _kleur = "" -%}
+{%- assign _type = "" -%}
+{%- for tag in collection.all_tags -%}
+  {%- assign _tl = tag | downcase -%}
+  {%- if _tl contains "geslacht:" -%}
+    {%- assign _geslacht = _geslacht | append: tag | append: "|||" -%}
+  {%- elsif _tl contains "maat:" -%}
+    {%- assign _maat = _maat | append: tag | append: "|||" -%}
+  {%- elsif _tl contains "kleur:" -%}
+    {%- assign _kleur = _kleur | append: tag | append: "|||" -%}
+  {%- elsif _tl contains "type:" -%}
+    {%- assign _type = _type | append: tag | append: "|||" -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign geslacht_arr = _geslacht | split: "|||" -%}
+{%- assign maat_arr     = _maat     | split: "|||" -%}
+{%- assign kleur_arr    = _kleur    | split: "|||" -%}
+{%- assign type_arr     = _type     | split: "|||" -%}
+{%- assign vendors = collection.products | map: 'vendor' | uniq | sort -%}
+
+<div style="max-width:1280px; margin:0 auto; padding:2rem 1.25rem 4rem;">
 
   <!-- Header -->
-  <div class="mb-10">
-    <p class="text-xs font-semibold tracking-[.2em] uppercase text-[#6b7280] mb-2">Collectie</p>
-    <h1 class="text-4xl font-black tracking-tight">{{ collection.title }}</h1>
+  <div style="margin-bottom:1.5rem;">
+    <p style="font-size:0.72rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#6b7280; margin:0 0 0.35rem;">Collectie</p>
+    <h1 style="font-size:2rem; font-weight:900; letter-spacing:-0.04em; margin:0 0 0.4rem; color:#0a0a0a;">{{ collection.title }}</h1>
     {%- if collection.description != blank -%}
-    <div class="mt-3 text-[#6b7280] max-w-2xl">{{ collection.description }}</div>
+    <div style="color:#6b7280; max-width:40rem; font-size:0.9rem; margin:0 0 0.4rem;">{{ collection.description }}</div>
     {%- endif -%}
-    <p class="mt-2 text-sm text-[#6b7280]" id="bx-product-count">{{ collection.products_count }} producten</p>
+    <p style="font-size:0.85rem; color:#6b7280; margin:0;" id="bx-count">{{ collection.products_count }} producten</p>
   </div>
 
-  <!-- Subcategorieën kinderfietsen -->
+  <!-- Subcategorieeen kinderfietsen -->
   {%- if collection.handle == 'kinderfietsen' -%}
-  <div class="grid grid-cols-2 gap-4 mb-10">
-    <a href="/collections/jongensfietsen" class="group relative block rounded-2xl overflow-hidden aspect-[3/2] bg-bx-gray">
-      <img
-        src="https://www.volare-kinderfietsen.nl/cdn/shop/files/Disney_Cars_Kinderfiets_-_Jongens_-_12_inch_-_Twee_handremmen_-_1-W1800_8984d723-2efa-4f96-bc5c-4e9ab59eda38.jpg?v=1779840144"
-        alt="Jongensfietsen"
-        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        loading="lazy"
-      >
-      <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent"></div>
-      <div class="absolute bottom-0 left-0 right-0 p-5">
-        <h3 class="text-white font-black text-lg leading-tight mb-2">Alle jongensfietsen</h3>
-        <span class="inline-flex items-center gap-1.5 text-white text-sm font-semibold group-hover:gap-3 transition-all duration-300">
-          Bekijk collectie
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
-        </span>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem;">
+    <a href="/collections/jongensfietsen" style="position:relative; display:block; border-radius:14px; overflow:hidden; aspect-ratio:3/2; background:#f7f7f7; text-decoration:none;">
+      <img src="https://www.volare-kinderfietsen.nl/cdn/shop/files/Disney_Cars_Kinderfiets_-_Jongens_-_12_inch_-_Twee_handremmen_-_1-W1800_8984d723-2efa-4f96-bc5c-4e9ab59eda38.jpg?v=1779840144" alt="Jongensfietsen" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+      <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);"></div>
+      <div style="position:absolute; bottom:0; left:0; right:0; padding:1.1rem;">
+        <h3 style="color:#fff; font-weight:900; font-size:1rem; margin:0 0 0.3rem;">Alle jongensfietsen</h3>
+        <span style="color:#fff; font-size:0.8rem; font-weight:600;">Bekijk collectie</span>
       </div>
     </a>
-    <a href="/collections/meisjesfietsen" class="group relative block rounded-2xl overflow-hidden aspect-[3/2] bg-bx-gray">
-      <img
-        src="https://images.unsplash.com/photo-1520872024865-3ff2805d8bb3?w=600&q=80&auto=format&fit=crop"
-        alt="Meisjesfietsen"
-        class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        loading="lazy"
-      >
-      <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent"></div>
-      <div class="absolute bottom-0 left-0 right-0 p-5">
-        <h3 class="text-white font-black text-lg leading-tight mb-2">Alle meisjesfietsen</h3>
-        <span class="inline-flex items-center gap-1.5 text-white text-sm font-semibold group-hover:gap-3 transition-all duration-300">
-          Bekijk collectie
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
-        </span>
+    <a href="/collections/meisjesfietsen" style="position:relative; display:block; border-radius:14px; overflow:hidden; aspect-ratio:3/2; background:#f7f7f7; text-decoration:none;">
+      <img src="https://images.unsplash.com/photo-1520872024865-3ff2805d8bb3?w=600&q=80&auto=format&fit=crop" alt="Meisjesfietsen" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+      <div style="position:absolute; inset:0; background:linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);"></div>
+      <div style="position:absolute; bottom:0; left:0; right:0; padding:1.1rem;">
+        <h3 style="color:#fff; font-weight:900; font-size:1rem; margin:0 0 0.3rem;">Alle meisjesfietsen</h3>
+        <span style="color:#fff; font-size:0.8rem; font-weight:600;">Bekijk collectie</span>
       </div>
     </a>
   </div>
@@ -50,85 +57,277 @@
 
   {%- if collection.products.size > 0 -%}
 
-  <!-- Merkfilters -->
-  {%- assign vendors = collection.products | map: 'vendor' | uniq | sort -%}
-  {%- if vendors.size > 1 -%}
-  <div class="flex flex-wrap gap-2 mb-8" id="bx-filters">
-    <button
-      class="bx-filter-btn px-4 py-2 rounded-full text-sm font-semibold border-2 border-[#0a0a0a] bg-[#0a0a0a] text-white transition-all duration-200"
-      data-vendor="all"
-      onclick="bxFilter(this)"
-    >Alle merken</button>
-    {%- for vendor in vendors -%}
-    <button
-      class="bx-filter-btn px-4 py-2 rounded-full text-sm font-semibold border-2 border-[#e5e7eb] bg-white text-[#0a0a0a] hover:border-[#0a0a0a] transition-all duration-200"
-      data-vendor="{{ vendor | escape }}"
-      onclick="bxFilter(this)"
-    >{{ vendor }}</button>
-    {%- endfor -%}
-  </div>
-  {%- endif -%}
+  <!-- Mobile filter toggle knop -->
+  <button id="bx-mob-toggle" onclick="bxMobToggle()" style="width:100%; background:#f7f7f7; border:1px solid #e5e5e5; border-radius:8px; padding:0.7rem 1rem; font-weight:700; font-size:0.85rem; color:#111; cursor:pointer; margin-bottom:0.75rem; align-items:center; justify-content:space-between; font-family:inherit; display:none;">
+    <span style="display:flex; align-items:center; gap:0.5rem;">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+      Filters
+    </span>
+    <span id="bx-mob-badge" style="background:#b5f23d; color:#111; font-size:0.72rem; font-weight:800; padding:2px 8px; border-radius:20px; display:none;"></span>
+  </button>
 
-  <!-- Product grid -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="bx-product-grid">
-    {%- for product in collection.products -%}
-    <div class="bx-product-item" data-vendor="{{ product.vendor | escape }}">
-      {%- render 'product-card', product: product -%}
-    </div>
-    {%- endfor -%}
-  </div>
+  <!-- Actieve filter chips -->
+  <div id="bx-chips" style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.75rem;"></div>
 
-  <!-- Geen resultaten bij filter -->
-  <p class="hidden py-16 text-center text-[#6b7280]" id="bx-no-results">Geen producten gevonden voor dit merk.</p>
+  <!-- Hoofdlayout: sidebar + grid -->
+  <div id="bx-layout" style="display:flex; gap:1.75rem; align-items:flex-start;">
+
+    <!-- Filter sidebar -->
+    <aside id="bx-sidebar" style="width:195px; flex-shrink:0; position:sticky; top:1.25rem;">
+
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <span style="font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#111;">Filters</span>
+        <button onclick="bxClearAll()" style="font-size:0.75rem; color:#888; background:none; border:none; cursor:pointer; font-family:inherit; padding:0; text-decoration:underline;">Wis alles</button>
+      </div>
+
+      <!-- Merk -->
+      {%- if vendors.size > 1 -%}
+      <div style="margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #f0f0f0;">
+        <p style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin:0 0 0.55rem;">Merk</p>
+        {%- for v in vendors -%}
+        <button class="bxf" data-group="merk" data-value="{{ v | escape }}" data-label="{{ v | escape }}" onclick="bxToggle(this)" style="display:flex; align-items:center; gap:0.45rem; width:100%; text-align:left; background:none; border:none; padding:0.28rem 0; font-size:0.84rem; color:#444; cursor:pointer; font-family:inherit; font-weight:500;">
+          <span class="bxf-dot" style="flex-shrink:0; width:13px; height:13px; border:2px solid #ccc; border-radius:3px; transition:all 0.15s;"></span>
+          {{ v }}
+        </button>
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      <!-- Geslacht -->
+      {%- assign has_g = false -%}
+      {%- for t in geslacht_arr -%}{%- unless t == "" -%}{%- assign has_g = true -%}{%- endunless -%}{%- endfor -%}
+      {%- if has_g -%}
+      <div style="margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #f0f0f0;">
+        <p style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin:0 0 0.55rem;">Geslacht</p>
+        {%- for t in geslacht_arr -%}
+          {%- unless t == "" -%}
+          {%- assign lbl = t | split: ":" | last | capitalize -%}
+          <button class="bxf" data-group="tag" data-value="{{ t | escape }}" data-label="{{ lbl }}" onclick="bxToggle(this)" style="display:flex; align-items:center; gap:0.45rem; width:100%; text-align:left; background:none; border:none; padding:0.28rem 0; font-size:0.84rem; color:#444; cursor:pointer; font-family:inherit; font-weight:500;">
+            <span class="bxf-dot" style="flex-shrink:0; width:13px; height:13px; border:2px solid #ccc; border-radius:3px; transition:all 0.15s;"></span>
+            {{ lbl }}
+          </button>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      <!-- Maat -->
+      {%- assign has_m = false -%}
+      {%- for t in maat_arr -%}{%- unless t == "" -%}{%- assign has_m = true -%}{%- endunless -%}{%- endfor -%}
+      {%- if has_m -%}
+      <div style="margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #f0f0f0;">
+        <p style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin:0 0 0.55rem;">Maat</p>
+        {%- for t in maat_arr -%}
+          {%- unless t == "" -%}
+          {%- assign lbl = t | split: ":" | last -%}
+          <button class="bxf" data-group="tag" data-value="{{ t | escape }}" data-label="{{ lbl }}" onclick="bxToggle(this)" style="display:flex; align-items:center; gap:0.45rem; width:100%; text-align:left; background:none; border:none; padding:0.28rem 0; font-size:0.84rem; color:#444; cursor:pointer; font-family:inherit; font-weight:500;">
+            <span class="bxf-dot" style="flex-shrink:0; width:13px; height:13px; border:2px solid #ccc; border-radius:3px; transition:all 0.15s;"></span>
+            {{ lbl }}
+          </button>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      <!-- Kleur -->
+      {%- assign has_k = false -%}
+      {%- for t in kleur_arr -%}{%- unless t == "" -%}{%- assign has_k = true -%}{%- endunless -%}{%- endfor -%}
+      {%- if has_k -%}
+      <div style="margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #f0f0f0;">
+        <p style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin:0 0 0.55rem;">Kleur</p>
+        {%- for t in kleur_arr -%}
+          {%- unless t == "" -%}
+          {%- assign lbl = t | split: ":" | last | capitalize -%}
+          <button class="bxf" data-group="tag" data-value="{{ t | escape }}" data-label="{{ lbl }}" onclick="bxToggle(this)" style="display:flex; align-items:center; gap:0.45rem; width:100%; text-align:left; background:none; border:none; padding:0.28rem 0; font-size:0.84rem; color:#444; cursor:pointer; font-family:inherit; font-weight:500;">
+            <span class="bxf-dot" style="flex-shrink:0; width:13px; height:13px; border:2px solid #ccc; border-radius:3px; transition:all 0.15s;"></span>
+            {{ lbl }}
+          </button>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
+      <!-- Type -->
+      {%- assign has_tp = false -%}
+      {%- for t in type_arr -%}{%- unless t == "" -%}{%- assign has_tp = true -%}{%- endunless -%}{%- endfor -%}
+      {%- if has_tp -%}
+      <div style="margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #f0f0f0;">
+        <p style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin:0 0 0.55rem;">Type</p>
+        {%- for t in type_arr -%}
+          {%- unless t == "" -%}
+          {%- assign lbl = t | split: ":" | last | capitalize -%}
+          <button class="bxf" data-group="tag" data-value="{{ t | escape }}" data-label="{{ lbl }}" onclick="bxToggle(this)" style="display:flex; align-items:center; gap:0.45rem; width:100%; text-align:left; background:none; border:none; padding:0.28rem 0; font-size:0.84rem; color:#444; cursor:pointer; font-family:inherit; font-weight:500;">
+            <span class="bxf-dot" style="flex-shrink:0; width:13px; height:13px; border:2px solid #ccc; border-radius:3px; transition:all 0.15s;"></span>
+            {{ lbl }}
+          </button>
+          {%- endunless -%}
+        {%- endfor -%}
+      </div>
+      {%- endif -%}
+
+    </aside>
+
+    <!-- Product grid -->
+    <main style="flex:1; min-width:0;">
+      <div id="bx-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(190px, 1fr)); gap:1.1rem;">
+        {%- for product in collection.products -%}
+        <div class="bx-item"
+          data-vendor="{{ product.vendor | escape }}"
+          data-tags="|{{ product.tags | join: '|' | escape }}|">
+          {%- render 'product-card', product: product -%}
+        </div>
+        {%- endfor -%}
+      </div>
+      <p id="bx-nores" style="display:none; padding:4rem 0; text-align:center; color:#6b7280; font-size:1rem;">Geen producten gevonden voor deze filters. <button onclick="bxClearAll()" style="background:none; border:none; color:#111; font-weight:700; cursor:pointer; font-family:inherit; text-decoration:underline;">Wis filters</button></p>
+    </main>
+
+  </div>
 
   <!-- Pagination -->
   {%- if paginate.pages > 1 -%}
-  <div class="mt-12 flex justify-center gap-2">
+  <div style="margin-top:3rem; display:flex; justify-content:center; gap:0.5rem;">
     {{- paginate | default_pagination -}}
   </div>
   {%- endif -%}
 
-  <script>
-    function bxFilter(btn) {
-      var vendor = btn.getAttribute('data-vendor');
-      var items = document.querySelectorAll('.bx-product-item');
-      var visible = 0;
-
-      items.forEach(function(item) {
-        if (vendor === 'all' || item.getAttribute('data-vendor') === vendor) {
-          item.style.display = '';
-          visible++;
-        } else {
-          item.style.display = 'none';
-        }
-      });
-
-      // Update actieve knop
-      document.querySelectorAll('.bx-filter-btn').forEach(function(b) {
-        if (b === btn) {
-          b.classList.add('bg-[#0a0a0a]', 'text-white', 'border-[#0a0a0a]');
-          b.classList.remove('bg-white', 'text-[#0a0a0a]', 'border-[#e5e7eb]');
-        } else {
-          b.classList.remove('bg-[#0a0a0a]', 'text-white', 'border-[#0a0a0a]');
-          b.classList.add('bg-white', 'text-[#0a0a0a]', 'border-[#e5e7eb]');
-        }
-      });
-
-      // Update teller en lege staat
-      var countEl = document.getElementById('bx-product-count');
-      if (countEl) countEl.textContent = visible + ' producten';
-      var noResults = document.getElementById('bx-no-results');
-      if (noResults) noResults.classList.toggle('hidden', visible > 0);
-    }
-  </script>
-
   {%- else -%}
-  <div class="py-24 text-center">
-    <p class="text-lg text-[#6b7280]">Geen producten gevonden in deze collectie.</p>
-    <a href="/collections/all" class="mt-6 inline-flex items-center gap-2 bg-[#0a0a0a] text-white font-semibold px-8 py-4 rounded-full hover:bg-[#b5f23d] hover:text-[#0a0a0a] transition-all duration-300">
-      Bekijk alle producten
-    </a>
+  <div style="padding:6rem 0; text-align:center;">
+    <p style="font-size:1.1rem; color:#6b7280; margin:0 0 1.5rem;">Geen producten gevonden in deze collectie.</p>
+    <a href="/collections/all" style="display:inline-flex; align-items:center; background:#0a0a0a; color:#fff; font-weight:700; padding:0.85rem 2rem; border-radius:30px; text-decoration:none;">Bekijk alle producten</a>
   </div>
   {%- endif -%}
 
 </div>
+
+<style>
+  .bxf.active .bxf-dot {
+    background: #b5f23d !important;
+    border-color: #7bb820 !important;
+  }
+  .bxf.active {
+    color: #111 !important;
+    font-weight: 700 !important;
+  }
+  @media (max-width: 767px) {
+    #bx-mob-toggle { display: flex !important; }
+    #bx-layout { flex-direction: column !important; }
+    #bx-sidebar {
+      position: static !important;
+      width: 100% !important;
+      background: #f9f9f9;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 1rem 1.1rem;
+      display: none;
+    }
+    #bx-sidebar.bx-open { display: block !important; }
+    #bx-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
+  }
+</style>
+
+<script>
+  var bxSel = {};
+
+  function bxToggle(btn) {
+    var g = btn.getAttribute('data-group');
+    var v = btn.getAttribute('data-value');
+    if (!bxSel[g]) bxSel[g] = new Set();
+    if (bxSel[g].has(v)) {
+      bxSel[g].delete(v);
+      btn.classList.remove('active');
+    } else {
+      bxSel[g].add(v);
+      btn.classList.add('active');
+    }
+    bxApply();
+  }
+
+  function bxApply() {
+    var items = document.querySelectorAll('.bx-item');
+    var visible = 0;
+
+    var tagGroups = {};
+    if (bxSel['tag']) {
+      bxSel['tag'].forEach(function(t) {
+        var prefix = t.split(':')[0];
+        if (!tagGroups[prefix]) tagGroups[prefix] = [];
+        tagGroups[prefix].push(t);
+      });
+    }
+
+    items.forEach(function(item) {
+      var vendor = item.getAttribute('data-vendor');
+      var tags   = item.getAttribute('data-tags');
+      var show   = true;
+
+      if (bxSel['merk'] && bxSel['merk'].size > 0) {
+        if (!bxSel['merk'].has(vendor)) show = false;
+      }
+
+      if (show) {
+        for (var prefix in tagGroups) {
+          var matched = tagGroups[prefix].some(function(t) {
+            return tags.indexOf('|' + t + '|') >= 0;
+          });
+          if (!matched) { show = false; break; }
+        }
+      }
+
+      item.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    var el = document.getElementById('bx-count');
+    if (el) el.textContent = visible + ' producten';
+    var nr = document.getElementById('bx-nores');
+    if (nr) nr.style.display = visible === 0 ? 'block' : 'none';
+
+    renderChips();
+
+    var total = 0;
+    for (var g in bxSel) total += bxSel[g].size;
+    var badge = document.getElementById('bx-mob-badge');
+    if (badge) {
+      badge.textContent = total;
+      badge.style.display = total > 0 ? 'inline' : 'none';
+    }
+  }
+
+  function renderChips() {
+    var c = document.getElementById('bx-chips');
+    if (!c) return;
+    c.innerHTML = '';
+    var total = 0;
+    for (var g in bxSel) total += bxSel[g].size;
+    if (total === 0) return;
+
+    document.querySelectorAll('.bxf.active').forEach(function(btn) {
+      var lbl = btn.getAttribute('data-label') || btn.textContent.trim();
+      var chip = document.createElement('button');
+      chip.style.cssText = 'display:inline-flex; align-items:center; gap:0.3rem; background:#111; color:#fff; border:none; border-radius:20px; padding:0.28rem 0.75rem; font-size:0.78rem; font-weight:600; cursor:pointer; font-family:inherit;';
+      chip.innerHTML = lbl + ' <span style="font-size:1.1rem; line-height:1; margin-top:-1px;">x</span>';
+      var _btn = btn;
+      chip.onclick = function() { _btn.click(); };
+      c.appendChild(chip);
+    });
+
+    if (total > 1) {
+      var clr = document.createElement('button');
+      clr.style.cssText = 'display:inline-flex; align-items:center; background:none; color:#666; border:1px solid #ccc; border-radius:20px; padding:0.28rem 0.75rem; font-size:0.78rem; cursor:pointer; font-family:inherit;';
+      clr.textContent = 'Wis alles';
+      clr.onclick = bxClearAll;
+      c.appendChild(clr);
+    }
+  }
+
+  function bxClearAll() {
+    bxSel = {};
+    document.querySelectorAll('.bxf').forEach(function(b) { b.classList.remove('active'); });
+    bxApply();
+  }
+
+  function bxMobToggle() {
+    var sb = document.getElementById('bx-sidebar');
+    if (sb) sb.classList.toggle('bx-open');
+  }
+</script>
