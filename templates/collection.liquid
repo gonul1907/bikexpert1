@@ -58,8 +58,17 @@
         <button onclick="bxClearAll()" style="font-size:0.75rem; color:#888; background:none; border:none; cursor:pointer; font-family:inherit; padding:0; text-decoration:underline;">Wis alles</button>
       </div>
 
+      <!-- Beschikbaarheid -->
+      <div style="margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #f0f0f0;">
+        <p style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin:0 0 0.55rem;">Beschikbaarheid</p>
+        <button class="bxf" data-group="avail" data-value="in-stock" data-label="Op voorraad" onclick="bxToggle(this)" style="display:flex; align-items:center; gap:0.45rem; width:100%; text-align:left; background:none; border:none; padding:0.28rem 0; font-size:0.84rem; color:#444; cursor:pointer; font-family:inherit; font-weight:500;">
+          <span class="bxf-dot" style="flex-shrink:0; width:13px; height:13px; border:2px solid #ccc; border-radius:3px; transition:all 0.15s;"></span>
+          Op voorraad
+        </button>
+      </div>
+
       <!-- Merk -->
-      {%- if vendors.size > 1 -%}
+      {%- if vendors.size > 0 -%}
       <div style="margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #f0f0f0;">
         <p style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin:0 0 0.55rem;">Merk</p>
         {%- for v in vendors -%}
@@ -151,7 +160,8 @@
         {%- for product in collection.products -%}
         <div class="bx-item"
           data-vendor="{{ product.vendor | escape }}"
-          data-tags="|{{ product.tags | join: '|' | escape }}|">
+          data-tags="|{{ product.tags | join: '|' | escape }}|"
+          data-avail="{{ product.available }}">
           {%- render 'product-card', product: product -%}
         </div>
         {%- endfor -%}
@@ -234,14 +244,22 @@
     }
 
     items.forEach(function(item) {
-      var vendor = item.getAttribute('data-vendor');
-      var tags   = item.getAttribute('data-tags');
-      var show   = true;
+      var vendor  = item.getAttribute('data-vendor');
+      var tags    = item.getAttribute('data-tags');
+      var avail   = item.getAttribute('data-avail');
+      var show    = true;
 
-      if (bxSel['merk'] && bxSel['merk'].size > 0) {
+      // Beschikbaarheid
+      if (bxSel['avail'] && bxSel['avail'].size > 0) {
+        if (bxSel['avail'].has('in-stock') && avail !== 'true') show = false;
+      }
+
+      // Merk (OR)
+      if (show && bxSel['merk'] && bxSel['merk'].size > 0) {
         if (!bxSel['merk'].has(vendor)) show = false;
       }
 
+      // Tags: AND tussen prefix-groepen, OR binnen één groep
       if (show) {
         for (var prefix in tagGroups) {
           var matched = tagGroups[prefix].some(function(t) {
