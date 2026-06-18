@@ -1,25 +1,4 @@
-﻿{%- comment -%} Parse tag groups uit collection.all_tags {%- endcomment -%}
-{%- assign _geslacht = "" -%}
-{%- assign _maat = "" -%}
-{%- assign _kleur = "" -%}
-{%- assign _type = "" -%}
-{%- for tag in collection.all_tags -%}
-  {%- assign _tl = tag | downcase -%}
-  {%- if _tl contains "geslacht:" -%}
-    {%- assign _geslacht = _geslacht | append: tag | append: "|||" -%}
-  {%- elsif _tl contains "maat:" -%}
-    {%- assign _maat = _maat | append: tag | append: "|||" -%}
-  {%- elsif _tl contains "kleur:" -%}
-    {%- assign _kleur = _kleur | append: tag | append: "|||" -%}
-  {%- elsif _tl contains "type:" -%}
-    {%- assign _type = _type | append: tag | append: "|||" -%}
-  {%- endif -%}
-{%- endfor -%}
-{%- assign geslacht_arr = _geslacht | split: "|||" -%}
-{%- assign maat_arr     = _maat     | split: "|||" -%}
-{%- assign kleur_arr    = _kleur    | split: "|||" -%}
-{%- assign type_arr     = _type     | split: "|||" -%}
-{%- assign vendors = collection.products | map: 'vendor' | uniq | sort -%}
+﻿{%- assign vendors = collection.products | map: "vendor" | uniq | sort -%}
 
 <div style="max-width:1280px; margin:0 auto; padding:2rem 1.25rem 4rem;">
 
@@ -35,7 +14,7 @@
 
   {%- if collection.products.size > 0 -%}
 
-  <!-- Mobile filter toggle knop -->
+  <!-- Mobile filter toggle -->
   <button id="bx-mob-toggle" onclick="bxMobToggle()" style="width:100%; background:#f7f7f7; border:1px solid #e5e5e5; border-radius:8px; padding:0.7rem 1rem; font-weight:700; font-size:0.85rem; color:#111; cursor:pointer; margin-bottom:0.75rem; align-items:center; justify-content:space-between; font-family:inherit; display:none;">
     <span style="display:flex; align-items:center; gap:0.5rem;">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
@@ -47,11 +26,11 @@
   <!-- Actieve filter chips -->
   <div id="bx-chips" style="display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:0.75rem;"></div>
 
-  <!-- Hoofdlayout: sidebar + grid -->
+  <!-- Layout -->
   <div id="bx-layout" style="display:flex; gap:1.75rem; align-items:flex-start;">
 
     <!-- Filter sidebar -->
-    <aside id="bx-sidebar" style="width:195px; flex-shrink:0; position:sticky; top:1.25rem;">
+    <aside id="bx-sidebar" style="width:200px; flex-shrink:0; position:sticky; top:1.25rem;">
 
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
         <span style="font-size:0.72rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#111;">Filters</span>
@@ -80,77 +59,8 @@
       </div>
       {%- endif -%}
 
-      <!-- Geslacht -->
-      {%- assign has_g = false -%}
-      {%- for t in geslacht_arr -%}{%- unless t == "" -%}{%- assign has_g = true -%}{%- endunless -%}{%- endfor -%}
-      {%- if has_g -%}
-      <div style="margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #f0f0f0;">
-        <p style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin:0 0 0.55rem;">Geslacht</p>
-        {%- for t in geslacht_arr -%}
-          {%- unless t == "" -%}
-          {%- assign lbl = t | split: ":" | last | capitalize -%}
-          <button class="bxf" data-group="tag" data-value="{{ t | escape }}" data-label="{{ lbl }}" onclick="bxToggle(this)" style="display:flex; align-items:center; gap:0.45rem; width:100%; text-align:left; background:none; border:none; padding:0.28rem 0; font-size:0.84rem; color:#444; cursor:pointer; font-family:inherit; font-weight:500;">
-            <span class="bxf-dot" style="flex-shrink:0; width:13px; height:13px; border:2px solid #ccc; border-radius:3px; transition:all 0.15s;"></span>
-            {{ lbl }}
-          </button>
-          {%- endunless -%}
-        {%- endfor -%}
-      </div>
-      {%- endif -%}
-
-      <!-- Maat -->
-      {%- assign has_m = false -%}
-      {%- for t in maat_arr -%}{%- unless t == "" -%}{%- assign has_m = true -%}{%- endunless -%}{%- endfor -%}
-      {%- if has_m -%}
-      <div style="margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #f0f0f0;">
-        <p style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin:0 0 0.55rem;">Maat</p>
-        {%- for t in maat_arr -%}
-          {%- unless t == "" -%}
-          {%- assign lbl = t | split: ":" | last -%}
-          <button class="bxf" data-group="tag" data-value="{{ t | escape }}" data-label="{{ lbl }}" onclick="bxToggle(this)" style="display:flex; align-items:center; gap:0.45rem; width:100%; text-align:left; background:none; border:none; padding:0.28rem 0; font-size:0.84rem; color:#444; cursor:pointer; font-family:inherit; font-weight:500;">
-            <span class="bxf-dot" style="flex-shrink:0; width:13px; height:13px; border:2px solid #ccc; border-radius:3px; transition:all 0.15s;"></span>
-            {{ lbl }}
-          </button>
-          {%- endunless -%}
-        {%- endfor -%}
-      </div>
-      {%- endif -%}
-
-      <!-- Kleur -->
-      {%- assign has_k = false -%}
-      {%- for t in kleur_arr -%}{%- unless t == "" -%}{%- assign has_k = true -%}{%- endunless -%}{%- endfor -%}
-      {%- if has_k -%}
-      <div style="margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #f0f0f0;">
-        <p style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin:0 0 0.55rem;">Kleur</p>
-        {%- for t in kleur_arr -%}
-          {%- unless t == "" -%}
-          {%- assign lbl = t | split: ":" | last | capitalize -%}
-          <button class="bxf" data-group="tag" data-value="{{ t | escape }}" data-label="{{ lbl }}" onclick="bxToggle(this)" style="display:flex; align-items:center; gap:0.45rem; width:100%; text-align:left; background:none; border:none; padding:0.28rem 0; font-size:0.84rem; color:#444; cursor:pointer; font-family:inherit; font-weight:500;">
-            <span class="bxf-dot" style="flex-shrink:0; width:13px; height:13px; border:2px solid #ccc; border-radius:3px; transition:all 0.15s;"></span>
-            {{ lbl }}
-          </button>
-          {%- endunless -%}
-        {%- endfor -%}
-      </div>
-      {%- endif -%}
-
-      <!-- Type -->
-      {%- assign has_tp = false -%}
-      {%- for t in type_arr -%}{%- unless t == "" -%}{%- assign has_tp = true -%}{%- endunless -%}{%- endfor -%}
-      {%- if has_tp -%}
-      <div style="margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #f0f0f0;">
-        <p style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin:0 0 0.55rem;">Type</p>
-        {%- for t in type_arr -%}
-          {%- unless t == "" -%}
-          {%- assign lbl = t | split: ":" | last | capitalize -%}
-          <button class="bxf" data-group="tag" data-value="{{ t | escape }}" data-label="{{ lbl }}" onclick="bxToggle(this)" style="display:flex; align-items:center; gap:0.45rem; width:100%; text-align:left; background:none; border:none; padding:0.28rem 0; font-size:0.84rem; color:#444; cursor:pointer; font-family:inherit; font-weight:500;">
-            <span class="bxf-dot" style="flex-shrink:0; width:13px; height:13px; border:2px solid #ccc; border-radius:3px; transition:all 0.15s;"></span>
-            {{ lbl }}
-          </button>
-          {%- endunless -%}
-        {%- endfor -%}
-      </div>
-      {%- endif -%}
+      <!-- Dynamische variant-optie filters worden hier ingevoegd door JS -->
+      <div id="bx-dyn-filters"></div>
 
     </aside>
 
@@ -160,18 +70,25 @@
         {%- for product in collection.products -%}
         <div class="bx-item"
           data-vendor="{{ product.vendor | escape }}"
-          data-tags="|{{ product.tags | join: '|' | escape }}|"
-          data-avail="{{ product.available }}">
+          data-avail="{{ product.available }}"
+          data-o1n="{{ product.options[0] | downcase | escape }}"
+          data-o1v="|{{ product.variants | map: 'option1' | uniq | join: '|' | escape }}|"
+          data-o2n="{{ product.options[1] | downcase | escape }}"
+          data-o2v="|{{ product.variants | map: 'option2' | uniq | join: '|' | escape }}|"
+          data-o3n="{{ product.options[2] | downcase | escape }}"
+          data-o3v="|{{ product.variants | map: 'option3' | uniq | join: '|' | escape }}|">
           {%- render 'product-card', product: product -%}
         </div>
         {%- endfor -%}
       </div>
-      <p id="bx-nores" style="display:none; padding:4rem 0; text-align:center; color:#6b7280; font-size:1rem;">Geen producten gevonden voor deze filters. <button onclick="bxClearAll()" style="background:none; border:none; color:#111; font-weight:700; cursor:pointer; font-family:inherit; text-decoration:underline;">Wis filters</button></p>
+      <p id="bx-nores" style="display:none; padding:4rem 0; text-align:center; color:#6b7280; font-size:1rem;">
+        Geen producten gevonden.
+        <button onclick="bxClearAll()" style="background:none; border:none; color:#111; font-weight:700; cursor:pointer; font-family:inherit; text-decoration:underline;">Wis filters</button>
+      </p>
     </main>
 
   </div>
 
-  <!-- Pagination -->
   {%- if paginate.pages > 1 -%}
   <div style="margin-top:3rem; display:flex; justify-content:center; gap:0.5rem;">
     {{- paginate | default_pagination -}}
@@ -188,142 +105,168 @@
 </div>
 
 <style>
-  .bxf.active .bxf-dot {
-    background: #b5f23d !important;
-    border-color: #7bb820 !important;
-  }
-  .bxf.active {
-    color: #111 !important;
-    font-weight: 700 !important;
-  }
-  @media (max-width: 767px) {
-    #bx-mob-toggle { display: flex !important; }
-    #bx-layout { flex-direction: column !important; }
-    #bx-sidebar {
-      position: static !important;
-      width: 100% !important;
-      background: #f9f9f9;
-      border: 1px solid #eee;
-      border-radius: 10px;
-      padding: 1rem 1.1rem;
-      display: none;
-    }
-    #bx-sidebar.bx-open { display: block !important; }
-    #bx-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.75rem !important; }
+  .bxf.active .bxf-dot { background:#b5f23d !important; border-color:#7bb820 !important; }
+  .bxf.active { color:#111 !important; font-weight:700 !important; }
+  @media (max-width:767px) {
+    #bx-mob-toggle { display:flex !important; }
+    #bx-layout { flex-direction:column !important; }
+    #bx-sidebar { position:static !important; width:100% !important; background:#f9f9f9; border:1px solid #eee; border-radius:10px; padding:1rem 1.1rem; display:none; }
+    #bx-sidebar.bx-open { display:block !important; }
+    #bx-grid { grid-template-columns:repeat(2,1fr) !important; gap:0.75rem !important; }
   }
 </style>
 
 <script>
-  var bxSel = {};
+var bxSel = {};
 
-  function bxToggle(btn) {
-    var g = btn.getAttribute('data-group');
-    var v = btn.getAttribute('data-value');
-    if (!bxSel[g]) bxSel[g] = new Set();
-    if (bxSel[g].has(v)) {
-      bxSel[g].delete(v);
-      btn.classList.remove('active');
-    } else {
-      bxSel[g].add(v);
-      btn.classList.add('active');
-    }
-    bxApply();
-  }
+// Bouw dynamische filters vanuit variant-opties
+document.addEventListener('DOMContentLoaded', function() {
+  var items = document.querySelectorAll('.bx-item');
+  var groups = {}; // { optionName: Set<value> }
+  var groupOrder = [];
 
-  function bxApply() {
-    var items = document.querySelectorAll('.bx-item');
-    var visible = 0;
-
-    var tagGroups = {};
-    if (bxSel['tag']) {
-      bxSel['tag'].forEach(function(t) {
-        var prefix = t.split(':')[0];
-        if (!tagGroups[prefix]) tagGroups[prefix] = [];
-        tagGroups[prefix].push(t);
+  items.forEach(function(item) {
+    for (var i = 1; i <= 3; i++) {
+      var name = (item.getAttribute('data-o' + i + 'n') || '').trim();
+      var vals = (item.getAttribute('data-o' + i + 'v') || '');
+      if (!name || name === 'title') continue;
+      if (!groups[name]) { groups[name] = new Set(); groupOrder.push(name); }
+      vals.split('|').forEach(function(v) {
+        v = v.trim();
+        if (v) groups[name].add(v);
       });
     }
+  });
 
-    items.forEach(function(item) {
-      var vendor  = item.getAttribute('data-vendor');
-      var tags    = item.getAttribute('data-tags');
-      var avail   = item.getAttribute('data-avail');
-      var show    = true;
+  var container = document.getElementById('bx-dyn-filters');
+  if (!container) return;
 
-      // Beschikbaarheid
-      if (bxSel['avail'] && bxSel['avail'].size > 0) {
-        if (bxSel['avail'].has('in-stock') && avail !== 'true') show = false;
-      }
+  // Verwijder duplicaten in groupOrder
+  groupOrder = groupOrder.filter(function(v, i, a) { return a.indexOf(v) === i; });
 
-      // Merk (OR)
-      if (show && bxSel['merk'] && bxSel['merk'].size > 0) {
-        if (!bxSel['merk'].has(vendor)) show = false;
-      }
+  // Mooie labels
+  var labels = { maat:'Maat', size:'Maat', kleur:'Kleur', color:'Kleur', geslacht:'Geslacht', type:'Type', gewicht:'Gewicht', wielmaat:'Wielmaat' };
 
-      // Tags: AND tussen prefix-groepen, OR binnen één groep
-      if (show) {
-        for (var prefix in tagGroups) {
-          var matched = tagGroups[prefix].some(function(t) {
-            return tags.indexOf('|' + t + '|') >= 0;
-          });
-          if (!matched) { show = false; break; }
+  groupOrder.forEach(function(name) {
+    var vals = Array.from(groups[name]).sort(function(a, b) {
+      return a.localeCompare(b, 'nl', { numeric: true });
+    });
+    if (vals.length === 0) return;
+
+    var label = labels[name] || (name.charAt(0).toUpperCase() + name.slice(1));
+    var div = document.createElement('div');
+    div.style.cssText = 'margin-bottom:1.1rem; padding-bottom:1.1rem; border-bottom:1px solid #f0f0f0;';
+
+    var html = '<p style="font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#aaa; margin:0 0 0.55rem;">' + label + '</p>';
+    vals.forEach(function(val) {
+      var esc = val.replace(/"/g, '&quot;');
+      html += '<button class="bxf" data-group="opt_' + name + '" data-value="' + esc + '" data-label="' + esc + '" onclick="bxToggle(this)" style="display:flex; align-items:center; gap:0.45rem; width:100%; text-align:left; background:none; border:none; padding:0.28rem 0; font-size:0.84rem; color:#444; cursor:pointer; font-family:inherit; font-weight:500;"><span class="bxf-dot" style="flex-shrink:0; width:13px; height:13px; border:2px solid #ccc; border-radius:3px; transition:all 0.15s;"></span>' + val + '</button>';
+    });
+    div.innerHTML = html;
+    container.appendChild(div);
+  });
+});
+
+function bxToggle(btn) {
+  var g = btn.getAttribute('data-group');
+  var v = btn.getAttribute('data-value');
+  if (!bxSel[g]) bxSel[g] = new Set();
+  if (bxSel[g].has(v)) { bxSel[g].delete(v); btn.classList.remove('active'); }
+  else { bxSel[g].add(v); btn.classList.add('active'); }
+  bxApply();
+}
+
+function bxApply() {
+  var items = document.querySelectorAll('.bx-item');
+  var visible = 0;
+
+  items.forEach(function(item) {
+    var vendor = item.getAttribute('data-vendor');
+    var avail  = item.getAttribute('data-avail');
+    var show   = true;
+
+    // Beschikbaarheid
+    if (bxSel['avail'] && bxSel['avail'].size > 0 && bxSel['avail'].has('in-stock')) {
+      if (avail !== 'true') show = false;
+    }
+
+    // Merk (OR)
+    if (show && bxSel['merk'] && bxSel['merk'].size > 0) {
+      if (!bxSel['merk'].has(vendor)) show = false;
+    }
+
+    // Variant optie filters (AND tussen opties, OR binnen optie)
+    if (show) {
+      for (var g in bxSel) {
+        if (g.indexOf('opt_') !== 0) continue;
+        if (bxSel[g].size === 0) continue;
+        var optName = g.replace('opt_', '');
+        var matched = false;
+        for (var i = 1; i <= 3; i++) {
+          var iName = (item.getAttribute('data-o' + i + 'n') || '');
+          var iVals = (item.getAttribute('data-o' + i + 'v') || '');
+          if (iName === optName) {
+            bxSel[g].forEach(function(sel) {
+              if (iVals.indexOf('|' + sel + '|') >= 0) matched = true;
+            });
+          }
         }
+        if (!matched) { show = false; break; }
       }
-
-      item.style.display = show ? '' : 'none';
-      if (show) visible++;
-    });
-
-    var el = document.getElementById('bx-count');
-    if (el) el.textContent = visible + ' producten';
-    var nr = document.getElementById('bx-nores');
-    if (nr) nr.style.display = visible === 0 ? 'block' : 'none';
-
-    renderChips();
-
-    var total = 0;
-    for (var g in bxSel) total += bxSel[g].size;
-    var badge = document.getElementById('bx-mob-badge');
-    if (badge) {
-      badge.textContent = total;
-      badge.style.display = total > 0 ? 'inline' : 'none';
     }
+
+    item.style.display = show ? '' : 'none';
+    if (show) visible++;
+  });
+
+  var el = document.getElementById('bx-count');
+  if (el) el.textContent = visible + ' producten';
+  var nr = document.getElementById('bx-nores');
+  if (nr) nr.style.display = visible === 0 ? 'block' : 'none';
+
+  renderChips();
+
+  var total = 0;
+  for (var g in bxSel) total += bxSel[g].size;
+  var badge = document.getElementById('bx-mob-badge');
+  if (badge) { badge.textContent = total; badge.style.display = total > 0 ? 'inline' : 'none'; }
+}
+
+function renderChips() {
+  var c = document.getElementById('bx-chips');
+  if (!c) return;
+  c.innerHTML = '';
+  var total = 0;
+  for (var g in bxSel) total += bxSel[g].size;
+  if (total === 0) return;
+
+  document.querySelectorAll('.bxf.active').forEach(function(btn) {
+    var lbl = btn.getAttribute('data-label') || btn.textContent.trim();
+    var chip = document.createElement('button');
+    chip.style.cssText = 'display:inline-flex; align-items:center; gap:0.3rem; background:#111; color:#fff; border:none; border-radius:20px; padding:0.28rem 0.75rem; font-size:0.78rem; font-weight:600; cursor:pointer; font-family:inherit;';
+    chip.innerHTML = lbl + ' <span style="font-size:1rem; line-height:1;">x</span>';
+    var _btn = btn;
+    chip.onclick = function() { _btn.click(); };
+    c.appendChild(chip);
+  });
+
+  if (total > 1) {
+    var clr = document.createElement('button');
+    clr.style.cssText = 'display:inline-flex; align-items:center; background:none; color:#666; border:1px solid #ccc; border-radius:20px; padding:0.28rem 0.75rem; font-size:0.78rem; cursor:pointer; font-family:inherit;';
+    clr.textContent = 'Wis alles';
+    clr.onclick = bxClearAll;
+    c.appendChild(clr);
   }
+}
 
-  function renderChips() {
-    var c = document.getElementById('bx-chips');
-    if (!c) return;
-    c.innerHTML = '';
-    var total = 0;
-    for (var g in bxSel) total += bxSel[g].size;
-    if (total === 0) return;
+function bxClearAll() {
+  bxSel = {};
+  document.querySelectorAll('.bxf').forEach(function(b) { b.classList.remove('active'); });
+  bxApply();
+}
 
-    document.querySelectorAll('.bxf.active').forEach(function(btn) {
-      var lbl = btn.getAttribute('data-label') || btn.textContent.trim();
-      var chip = document.createElement('button');
-      chip.style.cssText = 'display:inline-flex; align-items:center; gap:0.3rem; background:#111; color:#fff; border:none; border-radius:20px; padding:0.28rem 0.75rem; font-size:0.78rem; font-weight:600; cursor:pointer; font-family:inherit;';
-      chip.innerHTML = lbl + ' <span style="font-size:1.1rem; line-height:1; margin-top:-1px;">x</span>';
-      var _btn = btn;
-      chip.onclick = function() { _btn.click(); };
-      c.appendChild(chip);
-    });
-
-    if (total > 1) {
-      var clr = document.createElement('button');
-      clr.style.cssText = 'display:inline-flex; align-items:center; background:none; color:#666; border:1px solid #ccc; border-radius:20px; padding:0.28rem 0.75rem; font-size:0.78rem; cursor:pointer; font-family:inherit;';
-      clr.textContent = 'Wis alles';
-      clr.onclick = bxClearAll;
-      c.appendChild(clr);
-    }
-  }
-
-  function bxClearAll() {
-    bxSel = {};
-    document.querySelectorAll('.bxf').forEach(function(b) { b.classList.remove('active'); });
-    bxApply();
-  }
-
-  function bxMobToggle() {
-    var sb = document.getElementById('bx-sidebar');
-    if (sb) sb.classList.toggle('bx-open');
-  }
+function bxMobToggle() {
+  var sb = document.getElementById('bx-sidebar');
+  if (sb) sb.classList.toggle('bx-open');
+}
 </script>
