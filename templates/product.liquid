@@ -116,8 +116,32 @@
 
       {% else %}
       <form action="/cart/add" method="post" id="product-form">
-        <input type="hidden" name="id" value="{{ current_variant.id }}">
+        <input type="hidden" name="id" id="variant-id" value="{{ current_variant.id }}">
       {% endunless %}
+
+        {% assign addon_product = blank %}
+        {% if product.metafields.custom.bijpassend_accessoire != blank and product.metafields.custom.bijpassend_accessoire.value != blank %}
+          {% assign addon_product = product.metafields.custom.bijpassend_accessoire.value %}
+        {% elsif product.metafields.custom.bijpassend_slot != blank and product.metafields.custom.bijpassend_slot.value != blank %}
+          {% assign addon_product = product.metafields.custom.bijpassend_slot.value %}
+        {% endif %}
+        {% assign addon_variant = blank %}
+        {% if addon_product != blank and addon_product.selected_or_first_available_variant %}
+          {% assign addon_variant = addon_product.selected_or_first_available_variant %}
+        {% endif %}
+
+        {% if addon_variant != blank and addon_variant.available %}
+        <div style="margin-bottom:1.25rem; border:1px solid #e6e6e6; border-radius:10px; padding:0.95rem; background:#fcfcfc;">
+          <div style="font-size:0.8rem; font-weight:700; color:#555; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.65rem;">Bijpassende accessoire</div>
+          <label for="addon-checkbox" style="display:flex; align-items:flex-start; gap:0.7rem; cursor:pointer;">
+            <input type="checkbox" id="addon-checkbox" data-addon-variant-id="{{ addon_variant.id }}" style="margin-top:0.2rem; width:18px; height:18px; accent-color:#111;">
+            <span style="display:flex; flex-direction:column; gap:0.15rem;">
+              <span style="font-size:0.92rem; color:#111; font-weight:700; line-height:1.35;">+ Voeg {{ addon_product.title }} toe</span>
+              <span style="font-size:0.84rem; color:#666;">{{ addon_variant.price | money }} per stuk</span>
+            </span>
+          </label>
+        </div>
+        {% endif %}
 
         <!-- Quantity -->
         <div style="margin-bottom:1.25rem;">
@@ -420,6 +444,50 @@
       btn.classList.add('selected');
     }
   });
+
+  var productForm = document.getElementById('product-form');
+  if (productForm) {
+    productForm.addEventListener('submit', function(e) {
+      var addonCheckbox = document.getElementById('addon-checkbox');
+      if (!addonCheckbox || !addonCheckbox.checked) return;
+
+      var addonVariantId = parseInt(addonCheckbox.dataset.addonVariantId || '0', 10);
+      if (!addonVariantId) return;
+
+      var variantInput = document.getElementById('variant-id') || productForm.querySelector('input[name="id"]');
+      var qtyInput = document.getElementById('qty');
+      var mainVariantId = parseInt(variantInput && variantInput.value ? variantInput.value : '0', 10);
+      var qty = parseInt(qtyInput && qtyInput.value ? qtyInput.value : '1', 10);
+
+      if (!mainVariantId || qty < 1) return;
+
+      e.preventDefault();
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          items: [
+            { id: mainVariantId, quantity: qty },
+            { id: addonVariantId, quantity: qty }
+          ]
+        })
+      })
+      .then(function(res) {
+        if (!res.ok) throw new Error('cart_add_failed');
+        return res.json();
+      })
+      .then(function() {
+        window.location.href = '/cart';
+      })
+      .catch(function() {
+        productForm.submit();
+      });
+    });
+  }
 </script>
 
 <style>
